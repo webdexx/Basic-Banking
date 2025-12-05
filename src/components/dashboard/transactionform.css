@@ -1,0 +1,48 @@
+.transaction_form_container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+#transactionForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form_group {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.form_group input {
+    width: 100%;
+}
+
+.response_container {
+    width: 60%;
+    margin: 4% auto;
+}
+
+.success_box {
+    padding: 20px;
+    border-bottom: 8px solid green;
+    border-radius: 5px;
+}
+
+.success_box h3 {
+    background-color: rgba(0, 150, 0, 0.274);
+    padding: 4px 18px;
+    border-radius: 4px;
+
+}
+
+.error-message {
+    color: red;
+    background-color: rgba(255, 161, 161, 0.295);
+    width: 50%;
+    margin: 8% auto;
+    padding: 20px;
+    border: 1px solid red;
+    border-radius: 10px;
+}

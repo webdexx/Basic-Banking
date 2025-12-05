@@ -1,0 +1,51 @@
+.header__brand {
+    width: 10%;
+}
+
+.header__brand img{
+    height: 50px;
+}
+
+.search__container {
+    width: 30%;
+}
+
+.search__container input[type="text"]{
+    width: 100%;
+}
+
+.header__menu {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.header__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    margin: 0 8px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: var(--theme-blue);
+    border-radius: 100%;
+    color: #fbfef9;
+}
+
+.profile_icon img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    margin: 0 8px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 50%;
+    border: 2px solid var(--theme-blue);
+    position: inherit;
+    top: 1.6%;
+    right:1% ;
+}

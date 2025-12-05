@@ -1,0 +1,48 @@
+.transaction__wrapper h2{
+    color: rgb(0, 110, 255);
+    text-transform: uppercase;
+    background-color: rgba(0, 110, 255, 0.164);
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.txn-details {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.txn_group {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px dashed var(--border-color);
+}
+
+.basic_txn {
+    width: 50%;
+    padding: 2rem;
+}
+
+.tx_icon {
+    margin: 2px 4px 0 0;
+}
+
+.tx_green {
+    color: green;
+    font-weight: bold;
+}
+.tx_red {
+    color: red;
+    font-weight: bold;
+}
+
+.tx_description {
+    border: 1px dashed var(--border-color);
+    text-align: left !important;
+    padding: 0 20px;
+}

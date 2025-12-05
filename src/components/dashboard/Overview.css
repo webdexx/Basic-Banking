@@ -1,0 +1,101 @@
+:root {
+  --main-black: #191923;
+  --main-white: #ffffff;
+  --secondary-white: #fbfef9;
+  --theme-blue: #053c5e;
+  --theme-blue-secondary: #bfdbf7;
+  --border-color: #dfdfdf;
+}
+
+.card__row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 0;
+}
+
+.overview__info__card {
+  padding: 30px 40px;
+}
+
+#balance_info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.balance_heading {
+  font-size: 24px;
+  font-weight: 400;
+  text-decoration: underline;
+  padding: 10px;
+}
+
+.available_balance {
+  font-size: 26px;
+  font-weight: 380;
+}
+
+.overview__transactions__card {
+  width: 94%;
+  padding: 10px 50px;
+}
+
+.overview_card {
+  background-image: url("../../assets/images/card_mock.png");
+  background-size: cover;
+  width: 300px;
+  height: 200px;
+}
+
+/* Color and Styles */
+.blue_bg {
+  background-color: var(--theme-blue-secondary);
+}
+
+.active_acc {
+    color: green;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.transaction__table {
+    overflow-y: auto;
+}
+
+.transaction__table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transaction__table table th, td {
+    padding: 12px 6px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+.transaction__table table tr:last-child td {
+  border-bottom: none;
+}
+/* .transaction__table table tr:nth-child(even) {
+    background-color: var(--theme-blue-secondary);
+} */
+
+.transaction__table table td button {
+    width: 100%;
+}
+
+.tx__green {
+  color: green;
+}
+
+.tx__red {
+  color: red;
+}
+
+
+/* Modal Stylings */
+.modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; }
+.modal { background:#fff; border-radius:8px; width:50%; max-width:95%; padding: 0 20px 10px 0;}
+
+.close-btn {display: block; float:right; width: 100px; }
+.inline-loading { margin-top:12px; }
+.inline-error { color:crimson; margin-top:12px; }
