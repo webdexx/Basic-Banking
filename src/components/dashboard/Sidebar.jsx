@@ -9,7 +9,7 @@ import {
   MdSettings,
   MdContactSupport,
 } from "react-icons/md";
-import { logout } from "@features/auth/authSlice";
+import { logout } from "@/features/auth/components/Login/authSlice";
 import { useDispatch } from "react-redux";
 import { clearAccount } from "@features/account/accountSlice";
 import { clearTransaction } from "@features/transactions/transactionsSlice";

@@ -12,14 +12,30 @@ const authSlice = createSlice({
     isAuth: !!getToken(),
     loading: false,
     error: null,
+    authMessage: null
   },
 
   reducers: {
+    loginStart: (state) => {
+      state.loading = true;
+      state.error = null;
+      state.isAuth = false;
+      state.authMessage = "Signing In..";
+    },
     loginSuccess: (state, action) => {
       const { token } = action.payload;
       state.token = token;
       state.isAuth = true;
       sessionStorage.setItem("token", token);
+      state.error = null;
+      state.authMessage = "Login Success ✅";
+    },
+    loginFailed: (state, action) => {
+      state.token = null;
+      state.isAuth = false;
+      state.loading = false;
+      state.error = action.payload // What should I write Here
+      state.authMessage = null;
     },
 
     logout: (state) => {
@@ -27,6 +43,8 @@ const authSlice = createSlice({
       state.user = null;
       state.role = null;
       state.isAuth = false;
+      state.authMessage = "LoggedOut ⚠️";
+      state.loading = false;
       
       sessionStorage.removeItem("accountNumber");
       sessionStorage.removeItem("balance");
@@ -34,11 +52,9 @@ const authSlice = createSlice({
       sessionStorage.removeItem("status");
       sessionStorage.clear();
       localStorage.clear();
-      console.log("Logout Reducer Called");
-      // console.clear();
     },
   },
 });
 
-export const { loginSuccess, logout } = authSlice.actions;
+export const { loginSuccess, logout, loginFailed, loginStart, authMessage } = authSlice.actions;
 export default authSlice.reducer;

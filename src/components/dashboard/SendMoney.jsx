@@ -21,7 +21,6 @@ export default function SendMoney() {
     document.title = "Send Money - Basic Banking";
   }, []);
 
-  console.log("isAuth: ", isAuth);
 
   useEffect(() => {
     if (!isAuth) {
@@ -54,7 +53,6 @@ export default function SendMoney() {
       if (!result.success) {
         setErrorMessage(result.error || "Transaction failed");
       } else {
-        console.log("Result Transactions Data", result.transaction);
         setSuccessData(result.transaction); // store transaction details
       }
     } catch (err) {

@@ -1,3 +1,19 @@
-.error-message {
-    color: red;
+.login-error {
+  color: red !important;
+  text-align: center;
+  font-weight: 400;
+  background-color: rgba(255, 0, 0, 0.26);
+  padding: 4px 4px;
+  border: 1px solid red;
+  border-radius: 10px;
+}
+
+.login-success {
+  color: green !important;
+  text-align: center;
+  font-weight: 400;
+  background-color: rgba(0, 128, 0, 0.26);
+  padding: 4px 4px;
+  border: 1px solid green;
+  border-radius: 10px;
 }

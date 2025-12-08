@@ -1,16 +1,14 @@
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { motion as Motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "@features/auth/loginUser";
+import { loginUser } from "@/features/auth/components/Login/loginUser";
 
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isAuth, error } = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(false);
-
+  const { isAuth, error, loading, authMessage } = useSelector((state) => state.auth);
   useEffect(() => {
       document.title = "Basic Banking - Login";
     }, []);
@@ -23,7 +21,6 @@ export default function Login() {
   
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
     const email = e.target.email.value;
     const password = e.target.password.value;
@@ -32,9 +29,8 @@ export default function Login() {
       await  dispatch(loginUser(email, password));
     } catch (error) {
     console.error("Login failed:", error);
-      // Show error message to user
     } finally {
-      setLoading(false);
+    console.log("Loaded")
     }
 
   };
@@ -49,14 +45,13 @@ export default function Login() {
         onSubmit={handleLogin}
       >
         <h3>Login Here</h3>
-        {error && <p className="error-message">{error}</p>}
         <input name="email" placeholder="Email" disabled={loading} />
         <input name="password" placeholder="Password" type="password" disabled={loading} />
         <button disabled={loading}>
           {loading ? "Logging in..." : "Login"}
         </button>
-        
-        
+        {error && <p className="login-error">{error} ❌</p>}
+        {authMessage && <p className="login-success">{authMessage}</p>}
 
         <Link to="/forgot-password" className="authLink">Forgot Password?</Link>
       </Motion.form>

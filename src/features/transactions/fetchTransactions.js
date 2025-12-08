@@ -91,7 +91,6 @@ export const fetchTransactionById = (id) => async (dispatch) => {
     return null;
   } finally {
     // optional: nothing
-    console.log("Evrything loaded");
   }
 };
 
