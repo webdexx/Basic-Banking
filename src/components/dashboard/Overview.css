@@ -15,20 +15,19 @@
 }
 
 .overview__info__card {
-  padding: 30px 40px;
+
 }
 
 #balance_info {
   display: flex;
   flex-direction: column;
-  text-align: right;
+  gap: 10px;
+  padding: 20px;
 }
 
-.balance_heading {
-  font-size: 24px;
-  font-weight: 400;
-  text-decoration: underline;
-  padding: 10px;
+.heading {
+  font-size: 22px;
+  padding: 20px;
 }
 
 .available_balance {
@@ -94,8 +93,45 @@
 
 /* Modal Stylings */
 .modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; }
-.modal { background:#fff; border-radius:8px; width:50%; max-width:95%; padding: 0 20px 10px 0;}
+.modal { background:#fff; border-radius:8px; width:50%; max-width:95%; padding: 0 0 10px 0;}
 
-.close-btn {display: block; float:right; width: 100px; }
+.close-btn {display: block; float:right; width: 100px; margin: 0 20px 10px 0;}
 .inline-loading { margin-top:12px; }
 .inline-error { color:crimson; margin-top:12px; }
+
+
+/* Hero Card Styles */
+
+.hero__card {
+  background-color: var(--theme-blue);
+  padding: 10px 30px;
+  max-width: 35%;
+  color: var(--secondary-white);
+}
+
+.hero_heading {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.hero_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--theme-blue-secondary);
+  width: 50px;
+  height: 50px;
+  padding: 8px;
+  border-radius: 50px;
+  color: var(--theme-blue);
+}
+
+.hero_info {
+  padding: 20px;
+  background-color: var(--main-white);
+  color: #191923;
+  width: 300px;
+  height: 300px;
+}

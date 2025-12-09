@@ -16,11 +16,6 @@ export const fetchAccount = () => async (dispatch) => {
       },
     });
 
-    // if(!res.ok) {
-    //   console.log("No Account Details Fetched");
-    //   return;
-    // }
-
     if (res.data.accountDetails) {
       const accountData = {
         id: res.data.accountDetails._id,
@@ -31,7 +26,6 @@ export const fetchAccount = () => async (dispatch) => {
         status: res.data.accountDetails.status,
         token: token, // Pass the token along
       };
-      console.log("API Response ->", accountData);
       dispatch(fetchAccountData(accountData));
     } else {
       console.error("No accountDetails in response:", res.data);
