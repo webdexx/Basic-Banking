@@ -20,7 +20,6 @@ export const fetchKYC = () => async (dispatch) => {
     );
 
     dispatch(fetchKycSuccess(res.data));
-    console.log(res.data);
   } catch (error) {
     const errorMessage =
       error.response?.data?.message || error.message || "Signup failed";

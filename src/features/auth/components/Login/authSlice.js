@@ -13,7 +13,7 @@ const authSlice = createSlice({
     loading: false,
     error: null,
     authMessage: null,
-    accountStatus: ""
+    accountStatus: "PENDING"
   },
 
   reducers: {
@@ -40,7 +40,7 @@ const authSlice = createSlice({
       state.authMessage = null;
     },
 
-    logout: (state) => {
+    onLogout: (state) => {
       state.token = null;
       state.user = null;
       state.role = null;
@@ -58,5 +58,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { loginSuccess, logout, loginFailed, loginStart, authMessage } = authSlice.actions;
+export const { loginSuccess, onLogout, loginFailed, loginStart, authMessage } = authSlice.actions;
 export default authSlice.reducer;

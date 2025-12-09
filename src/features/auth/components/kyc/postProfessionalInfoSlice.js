@@ -6,8 +6,6 @@ const postProfessionalInfoSlice = createSlice({
     loading: false,
     success: false,
     error: null,
-    professionalInfo: null,   
-    kycStatus: null,      
   },
 
   reducers: {
@@ -18,15 +16,11 @@ const postProfessionalInfoSlice = createSlice({
     },
 
     
-    postProfessionalInfoSuccess: (state, action) => {
+    postProfessionalInfoSuccess: (state) => {
       state.loading = false;
       state.success = true;
       state.error = null;
-
-      const payload = action.payload || {};
-      state.professionalInfo = payload.documents || null;
-      state.kycStatus = payload.documents?.kycStatus || payload.kycStatus || null;
-    },
+},
 
     postProfessionalInfoFailed: (state, action) => {
       state.loading = false;
@@ -38,7 +32,7 @@ const postProfessionalInfoSlice = createSlice({
       state.loading = false;
       state.success = false;
       state.error = null;
-      state.ProfessionalInfo = null;
+      state.professionalInfo = null;
       state.kycStatus = null;
     },
   },

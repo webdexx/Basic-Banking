@@ -47,7 +47,7 @@ export default function Overview() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [dispatch, isAuth]);
+  }, [dispatch, isAuth, accountStatus]);
 
   if (!isAuth) {
     return <div>Please login to access the dashboard</div>;

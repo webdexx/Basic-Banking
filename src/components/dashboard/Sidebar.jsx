@@ -9,17 +9,17 @@ import {
   MdSettings,
   MdContactSupport,
 } from "react-icons/md";
-import { logout } from "@/features/auth/components/Login/authSlice";
 import { useDispatch } from "react-redux";
 import { clearAccount } from "@features/account/accountSlice";
 import { clearTransaction } from "@features/transactions/transactionsSlice";
+import { logoutUser } from "@/features/auth/components/Login/logoutUser";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logoutUser());
     dispatch({ type: "account/clearAccount" });
     dispatch(clearAccount());
     dispatch(clearTransaction());

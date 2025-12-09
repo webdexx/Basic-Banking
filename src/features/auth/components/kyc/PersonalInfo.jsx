@@ -6,11 +6,24 @@ import { useNavigate } from "react-router-dom";
 import { postPersonalInfo } from "./postPersonalDetails";
 import { toast } from "react-toastify";
 import { clearPostPersonalInfoStatus } from "./postPersonalInfoSlice";
+import { fetchKYC } from "./fetchKYC";
 
 export default function PersonalInfo() {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Complete Your KYC First - Basic Banking";
+  }, []);
+
+  const { personalInfo, documents } = useSelector((state) => state.kyc);
+
+  useEffect(() => {
+    if (personalInfo === "COMPLETE" && documents === "ACTIVE") {
+      navigate("/professional-info", { replace: true });
+    }
+  }, [personalInfo, documents, navigate]);
+
   const [step, setStep] = useState(1);
   const [correspondence, setCorrespondence] = useState(false);
   const [kycFormData, setKycFormData] = useState({
@@ -34,68 +47,166 @@ export default function PersonalInfo() {
     },
   });
 
-  const { personalInfo, documents } = useSelector((state) => state.kyc);
-
-
-  const { isAuth, accountStatus } = useSelector((state) => state.auth);
-
   const { success, error, loading } = useSelector(
     (state) => state.postPersonalInfo
   );
 
-  useEffect(() => {
-    document.title = "Complete Your KYC First - Basic Banking";
-  }, []);
-
   const [errors, setErrors] = useState({});
 
-  const validateForm = () => {
+  const calculateAge = (dobString) => {
+    const today = new Date();
+    const birthDate = new Date(dobString);
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+
+    // If birthday hasn’t happened yet this year → subtract 1
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+
+    return age;
+  };
+
+  const validateField = (name, value) => {
+    switch (name) {
+      case "gender": {
+        if (!value) return "Gender is required";
+        return "";
+      }
+
+      case "dob": {
+        if (!value) return "Date of Birth is required";
+        const age = calculateAge(value);
+        console.log(age);
+
+        if (age < 5) {
+          return "You must be at least 5 years old for an Account";
+        }
+
+        return "";
+      }
+
+      case "nationality": {
+        if (!value) return "Nationality is required";
+        if (value.trim().toUpperCase() !== "INDIAN") {
+          return "Only Indian citizens are allowed to open an account with Basic Banking";
+        }
+        return "";
+      }
+
+      case "permStreet": {
+        const trimmedStreet = value.trim();
+        if (!trimmedStreet || trimmedStreet.length < 15)
+          return "Address must be atleast 15 characters";
+        return "";
+      }
+
+      case "permCity": {
+        if (!value.trim()) return "City can't be empty";
+        return "";
+      }
+
+      case "permState": {
+        if (!value.trim()) return "Choose State";
+        return "";
+      }
+
+      case "permPinCode": {
+        if (!value.trim()) return "Pin-code can't be empty";
+        if (!/^\d{6}$/.test(value)) return "PIN must be 6 digits";
+        return "";
+      }
+
+      case "corrStreet": {
+        const trimmedStreet = value.trim();
+        if (!trimmedStreet || trimmedStreet.length < 15)
+          return "Address must be atleast 15 characters";
+        return "";
+      }
+
+      case "corrCity": {
+        if (!value.trim()) return "City can't be empty";
+        return "";
+      }
+
+      case "corrState": {
+        if (!value.trim()) return "Choose State";
+        return "";
+      }
+
+      case "corrPinCode": {
+        if (!value.trim()) return "Pin-code can't be empty";
+        if (!/^\d{6}$/.test(value)) return "PIN must be 6 digits";
+        return "";
+      }
+
+      default:
+        return "";
+    }
+  };
+
+  const validateStep1 = (formData) => {
     const newErrors = {};
 
-    if (!kycFormData.gender) {
-      newErrors.gender = "gender is required";
-    }
+    const genderError = validateField("gender", formData.gender, formData);
+    if (genderError) newErrors.gender = genderError;
 
-    if (!kycFormData.dob) {
-      newErrors.dob = "Date of Birth is required";
-    }
+    const dobError = validateField("dob", formData.dob, formData);
+    if (dobError) newErrors.dob = dobError;
 
-    if (!kycFormData.nationality) {
-      newErrors.nationality = "Nationality is required";
-    } else if (kycFormData.nationality.trim().toUpperCase() !== "INDIAN") {
-      newErrors.nationality =
-        "Only Indian citizens are allowed to open an account with Basic Banking";
-    }
+    const nationalityError = validateField(
+      "nationality",
+      formData.nationality,
+      formData
+    );
+    if (nationalityError) newErrors.nationality = nationalityError;
 
-    if (!kycFormData.permanentAddress.street.trim()) {
-      newErrors.permStreet = "Street cannot be empty";
-    }
+    return newErrors;
+  };
 
-    if (!kycFormData.permanentAddress.city.trim()) {
-      newErrors.permCity = "City can't be empty";
-    }
+  const validateStep2 = (formData) => {
+    const newErrors = {};
 
-    if (!kycFormData.permanentAddress.state.trim()) {
-      newErrors.permState = "Choose State";
-    }
+    const streetError = validateField(
+      "permStreet",
+      formData.permanentAddress.street,
+      formData
+    );
+    if (streetError) newErrors.permStreet = streetError;
 
-    if (!kycFormData.permanentAddress.pincode.trim()) {
-      newErrors.permPinCode = "Pin-code can't be empty";
-    }
+    const cityError = validateField(
+      "permCity",
+      formData.permanentAddress.city,
+      formData
+    );
+    if (cityError) newErrors.permCity = cityError;
+
+    const stateError = validateField(
+      "permState",
+      formData.permanentAddress.state,
+      formData
+    );
+    if (stateError) newErrors.permState = stateError;
+
+    const pincodeError = validateField(
+      "permPinCode",
+      formData.permanentAddress.pincode,
+      formData
+    );
+    if (pincodeError) newErrors.permPinCode = pincodeError;
 
     return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validateForm();``
-
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
     try {
       await dispatch(postPersonalInfo(kycFormData));
+      await dispatch(fetchKYC());
     } catch (err) {
       console.log(err);
     }
@@ -103,18 +214,23 @@ export default function PersonalInfo() {
 
   useEffect(() => {
     if (success) {
-      toast.success("✅ Personal details saved successfully!");
+      toast.success("✅ Personal details saved successfully!", {
+        position: "top-center",
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       dispatch(clearPostPersonalInfoStatus());
-      if (personalInfo === "COMPLETE" && documents === "ACTIVE") {
-      navigate("/professional-details", { replace: true });
-    }
     }
 
     if (error) {
       toast.error(error);
       dispatch(clearPostPersonalInfoStatus());
     }
-  }, [success, error, dispatch]);
+  }, [success, error, dispatch, personalInfo, documents, navigate]);
 
   return (
     <div className="kyc__form__container">
@@ -136,12 +252,14 @@ export default function PersonalInfo() {
                         name="gender"
                         value="MALE"
                         onChange={(e) => {
+                          const value = e.target.value;
                           setKycFormData({
                             ...kycFormData,
-                            gender: e.target.value,
+                            gender: value,
                           });
-                          if (errors.gender)
-                            setErrors({ ...errors, gender: "" });
+
+                          const errorMsg = validateField("gender", value);
+                          setErrors((prev) => ({ ...prev, gender: errorMsg }));
                         }}
                       />
                       <span className="name">Male</span>
@@ -153,12 +271,14 @@ export default function PersonalInfo() {
                         name="gender"
                         value="FEMALE"
                         onChange={(e) => {
+                          const value = e.target.value;
                           setKycFormData({
                             ...kycFormData,
-                            gender: e.target.value,
+                            gender: value,
                           });
-                          if (errors.gender)
-                            setErrors({ ...errors, gender: "" });
+
+                          const errorMsg = validateField("gender", value);
+                          setErrors((prev) => ({ ...prev, gender: errorMsg }));
                         }}
                       />
                       <span className="name">Female</span>
@@ -170,20 +290,22 @@ export default function PersonalInfo() {
                         name="gender"
                         value="OTHER"
                         onChange={(e) => {
+                          const value = e.target.value;
                           setKycFormData({
                             ...kycFormData,
-                            gender: e.target.value,
+                            gender: value,
                           });
-                          if (errors.gender)
-                            setErrors({ ...errors, gender: "" });
+
+                          const errorMsg = validateField("gender", value);
+                          setErrors((prev) => ({ ...prev, gender: errorMsg }));
                         }}
                       />
                       <span className="name">Others</span>
                     </label>
-                    {errors.gender && (
-                      <span className="login-error">**{errors.gender}**</span>
-                    )}
                   </div>
+                  {errors.gender && (
+                    <span className="login-error">**{errors.gender}**</span>
+                  )}
                 </div>
                 <div className="input_container">
                   <label htmlFor="date">Date</label>
@@ -193,11 +315,14 @@ export default function PersonalInfo() {
                     name="dob"
                     value={kycFormData.dob}
                     onChange={(e) => {
+                      const value = e.target.value;
                       setKycFormData({
                         ...kycFormData,
-                        dob: e.target.value,
+                        dob: value,
                       });
-                      if (errors.dob) setErrors({ ...errors, dob: "" });
+
+                      const errorMsg = validateField("dob", value);
+                      setErrors((prev) => ({ ...prev, dob: errorMsg }));
                     }}
                   />
                   {errors.dob && (
@@ -212,12 +337,14 @@ export default function PersonalInfo() {
                     name="nationality"
                     value={kycFormData.nationality}
                     onChange={(e) => {
+                      const value = e.target.value;
                       setKycFormData({
                         ...kycFormData,
-                        nationality: e.target.value,
+                        nationality: value,
                       });
-                      if (errors.nationality)
-                        setErrors({ ...errors, nationality: "" });
+
+                      const errorMsg = validateField("nationality", value);
+                      setErrors((prev) => ({ ...prev, nationality: errorMsg }));
                     }}
                   />
                   {errors.nationality && (
@@ -229,7 +356,19 @@ export default function PersonalInfo() {
               </div>
             </div>
 
-            <button type="button" onClick={() => setStep(step + 1)}>
+            <button
+              type="button"
+              onClick={() => {
+                const validationErrors = validateStep1(kycFormData);
+
+                if (Object.keys(validationErrors).length > 0) {
+                  setErrors(validationErrors);
+                  return;
+                }
+
+                setStep(step + 1);
+              }}
+            >
               Next
             </button>
           </div>
@@ -250,15 +389,21 @@ export default function PersonalInfo() {
                       name="permStreet"
                       value={kycFormData.permanentAddress.street}
                       onChange={(e) => {
+                        const value = e.target.value;
+
                         setKycFormData({
                           ...kycFormData,
                           permanentAddress: {
                             ...kycFormData.permanentAddress,
-                            street: e.target.value,
+                            street: value,
                           },
                         });
-                        if (errors.permStreet)
-                          setErrors({ ...errors, permStreet: "" });
+
+                        const errorMsg = validateField("permStreet", value);
+                        setErrors((prev) => ({
+                          ...prev,
+                          permStreet: errorMsg,
+                        }));
                       }}
                     />
                     {errors.permStreet && (
@@ -279,15 +424,21 @@ export default function PersonalInfo() {
                       name="permCity"
                       value={kycFormData.permanentAddress.city}
                       onChange={(e) => {
+                        const value = e.target.value;
+
                         setKycFormData({
                           ...kycFormData,
                           permanentAddress: {
                             ...kycFormData.permanentAddress,
-                            city: e.target.value,
+                            city: value,
                           },
                         });
-                        if (errors.permCity)
-                          setErrors({ ...errors, permCity: "" });
+
+                        const errorMsg = validateField("permCity", value);
+                        setErrors((prev) => ({
+                          ...prev,
+                          permCity: errorMsg,
+                        }));
                       }}
                     />
                     {errors.permCity && (
@@ -304,15 +455,21 @@ export default function PersonalInfo() {
                       name="permState"
                       value={kycFormData.permanentAddress.state}
                       onChange={(e) => {
+                        const value = e.target.value;
+
                         setKycFormData({
                           ...kycFormData,
                           permanentAddress: {
                             ...kycFormData.permanentAddress,
-                            state: e.target.value,
+                            state: value,
                           },
                         });
-                        if (errors.permState)
-                          setErrors({ ...errors, permState: "" });
+
+                        const errorMsg = validateField("permState", value);
+                        setErrors((prev) => ({
+                          ...prev,
+                          permState: errorMsg,
+                        }));
                       }}
                     />
                     {errors.permState && (
@@ -352,15 +509,21 @@ export default function PersonalInfo() {
                       placeholder="Enter pincode"
                       value={kycFormData.permanentAddress.pincode}
                       onChange={(e) => {
+                        const value = e.target.value;
+
                         setKycFormData({
                           ...kycFormData,
                           permanentAddress: {
                             ...kycFormData.permanentAddress,
-                            pincode: e.target.value,
+                            pincode: value,
                           },
                         });
-                        if (errors.permPinCode)
-                          setErrors({ ...errors, permPinCode: "" });
+
+                        const errorMsg = validateField("permPinCode", value);
+                        setErrors((prev) => ({
+                          ...prev,
+                          permPinCode: errorMsg,
+                        }));
                       }}
                     />
                     {errors.permPinCode && (
@@ -379,8 +542,14 @@ export default function PersonalInfo() {
             <button
               type="button"
               onClick={() => {
+                const validationErrors = validateStep2(kycFormData);
+
+                if (Object.keys(validationErrors).length > 0) {
+                  setErrors(validationErrors);
+                  return;
+                }
+
                 setStep(step + 1);
-                setCorrespondence(false);
               }}
             >
               Next
@@ -534,7 +703,7 @@ export default function PersonalInfo() {
               Prev
             </button>
             <button type="Submit" disabled={loading}>
-               {loading ? "Submitting" : "Submit"} 
+              {loading ? "Submitting" : "Submit"}
             </button>
           </div>
         )}

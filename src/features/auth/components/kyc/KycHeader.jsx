@@ -1,15 +1,16 @@
 import "./kyc-header.css";
 import { FiLogOut, FiHelpCircle } from "react-icons/fi";
-import { logout } from "@/features/auth/components/Login/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../Login/logoutUser";
+
 
 export default function KycHeader() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logoutUser());
     sessionStorage.clear();
     localStorage.clear();
     navigate("/", { replace: true });

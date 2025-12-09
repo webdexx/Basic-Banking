@@ -6,8 +6,6 @@ const postPersonalInfoSlice = createSlice({
     loading: false,
     success: false,
     error: null,
-    personalInfo: null,   
-    kycStatus: null,      
   },
 
   reducers: {
@@ -18,14 +16,10 @@ const postPersonalInfoSlice = createSlice({
     },
 
     
-    postPersonalInfoSuccess: (state, action) => {
+    postPersonalInfoSuccess: (state) => {
       state.loading = false;
       state.success = true;
       state.error = null;
-
-      const payload = action.payload || {};
-      state.personalInfo = payload.personalInfo || null;
-      state.kycStatus = payload.personalInfo?.kycStatus || payload.kycStatus || null;
     },
 
     postPersonalInfoFailed: (state, action) => {

@@ -6,54 +6,63 @@ const kycSlice = createSlice({
   initialState: {
     loading: false,
     error: null,
-    personalInfo: "ACTIVE",
-    documents: "DUE",
-    overallStatus: "PENDING",
+    personalInfo: null,
+    documents: null,
+    overallStatus: null,
+    loaded: false,
+    userId: null
   },
 
   reducers: {
     fetchKycStart: (state) => {
       state.loading = true;
       state.error = null;
-      state.personalInfo = "ACTIVE";
-      state.documents = "DUE";
-      state.overallStatus = "PENDING";
+      state.loaded = false;
     },
 
     fetchKycSuccess: (state, action) => {
-      const { personalInfo, documents, overallStatus } = action.payload;
+      const { userKycStatus, userId } = action.payload;
       state.loading = false;
       state.error = null;
-      state.personalInfo = personalInfo;
-      state.documents = documents;
-      state.overallStatus = overallStatus;
+      state.userId = userId;
+      if(userKycStatus){
+      state.personalInfo = userKycStatus.personalInfo;
+      state.documents = userKycStatus.documents;
+      state.overallStatus = userKycStatus.overallStatus;
+      state.loaded = true;
+      }
     },
 
     fetchingKycFailed: (state, action) => {
       state.loading = false;
       state.error = action.payload;
-      state.personalInfo = "ACTIVE";
-      state.documents = "DUE";
-      state.overallStatus = "PENDING";
+      state.loaded = true;
     },
 
     clearKycStatus: (state) => {
       state.loading = false;
       state.error = null;
     },
+    clearKycOnLogout: (state) => {
+      state.loading = false;
+      state.error = null;
+      state.userId = null;
+      state.personalInfo = null;
+      state.documents = null;
+      state.overallStatus = null;
+      state.loaded = false;
   },
+},
 
   extraReducers: (builder) => {
     builder.addCase(postPersonalInfoSuccess, (state, action) => {
-      const payload = action.payload | {};
-      const doc = payload?.personalInfo;
+  const { kycStatus } = action.payload || {};
 
-      if (doc?.kycStatus) {
-        state.personalInfo = doc.kycStatus.personalInfo;
-        state.documents = doc.kycStatus.documents;
-        state.overallStatus = doc.kycStatus.overallStatus;
-      }
-    });
+  if (kycStatus) {
+    state.personalInfo = kycStatus.personalInfo;
+    state.documents = kycStatus.documents;
+    state.overallStatus = kycStatus.overallStatus;
+  }});
   },
 });
 
@@ -62,6 +71,7 @@ export const {
   fetchKycSuccess,
   fetchingKycFailed,
   clearKycStatus,
+  clearKycOnLogout
 } = kycSlice.actions;
 
 export default kycSlice.reducer;
