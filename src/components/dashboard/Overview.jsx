@@ -126,8 +126,8 @@ export default function Overview() {
         </Card>
       </div>
       <div className="card__row">
-        <Card className="overview__transactions__card">
-          <h1>Recent 5 Transactions</h1>
+        {transactions.length > 0  && <Card className="overview__transactions__card">
+         <h1>Recent 5 Transactions</h1>
           <div className="transaction__table">
             <table>
               <thead>
@@ -198,7 +198,7 @@ export default function Overview() {
               </div>
             )}
           </div>
-        </Card>
+        </Card> }
       </div>
     </>
   );

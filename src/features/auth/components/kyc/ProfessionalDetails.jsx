@@ -87,7 +87,7 @@ export default function ProfessionalInfo() {
 
   useEffect(() => {
     if (success) {
-      toast.success("✅ KYC Details saved successfully!");
+      toast.success("KYC Details saved successfully!");
       dispatch(clearPostProfessionalInfoStatus());
     }
 
