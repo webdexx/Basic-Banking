@@ -1,7 +1,7 @@
-import { logout } from "@features/auth/authSlice";
+import { logoutUser } from "./logoutUser";
 
 export default function Logout(dispatch){
 
-    dispatch(logout());
+    dispatch(logoutUser());
     
 }

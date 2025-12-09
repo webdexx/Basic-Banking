@@ -3,8 +3,8 @@ import Header from '@components/dashboard/Header'
 import { Outlet } from 'react-router-dom';
 import './layout.css'
 
-
 export default function DashboardLayout() {
+
   
   return (
     <>

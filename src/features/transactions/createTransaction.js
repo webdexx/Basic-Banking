@@ -36,7 +36,6 @@ export const createTransactions =
         }
       );
 
-    console.log("createTransactions - API response:", res.data);
       dispatch(fetchTransactions());
 
       const body = res.data || {};
