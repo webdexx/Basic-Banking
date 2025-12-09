@@ -12,7 +12,8 @@ const authSlice = createSlice({
     isAuth: !!getToken(),
     loading: false,
     error: null,
-    authMessage: null
+    authMessage: null,
+    accountStatus: ""
   },
 
   reducers: {
@@ -29,6 +30,7 @@ const authSlice = createSlice({
       sessionStorage.setItem("token", token);
       state.error = null;
       state.authMessage = "Login Success ✅";
+      state.accountStatus = action.payload.flag
     },
     loginFailed: (state, action) => {
       state.token = null;

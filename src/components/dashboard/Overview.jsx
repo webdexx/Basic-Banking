@@ -10,14 +10,20 @@ import {
 import { MdArrowOutward, MdOutlineArrowDownward, MdOutlineBarChart, MdCompareArrows  } from "react-icons/md";
 import TransactionDetails from "./TransactionView";
 import PerformanceChart from "./components/PeformanceCard";
+import { replace, useNavigate } from "react-router-dom";
 
 export default function Overview() {
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth.isAuth);
+  const accountStatus = useSelector((state) => state.auth.accountStatus);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Overview - Basic Banking";
   }, []);
+
+
 
   const { accountNumber, balance, blockedAmount, status, user } = useSelector(
     (state) => state.account
@@ -29,6 +35,10 @@ export default function Overview() {
   // If you need to check authentication
   useEffect(() => {
     if (!isAuth) return;
+
+    if(accountStatus !== "APPROVED"){
+      navigate("/", replace(true));
+    }
 
     dispatch(fetchAccount());
 
