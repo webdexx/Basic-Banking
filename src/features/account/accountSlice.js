@@ -12,13 +12,13 @@ const accountSlice = createSlice({
     accountNumber: "",
     balance: 0,
     blockedAmount: 0,
-    status: "Logged out",
+    status: null,
     loading: false,
     error: null,
     id: null, // Added
     user: null, // Added
     isAuth: false, // Added
-    flag: "PENDING",
+    flag: null,
   },
   reducers: {
     fetchAccountData: (state, action) => {

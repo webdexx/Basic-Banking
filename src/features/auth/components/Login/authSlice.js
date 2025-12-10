@@ -13,7 +13,7 @@ const authSlice = createSlice({
     loading: false,
     error: null,
     authMessage: null,
-    accountStatus: "PENDING"
+    accountStatus: null
   },
 
   reducers: {
@@ -24,19 +24,19 @@ const authSlice = createSlice({
       state.authMessage = "Signing In..";
     },
     loginSuccess: (state, action) => {
-      const { token } = action.payload;
+      const { token, flag } = action.payload;
       state.token = token;
       state.isAuth = true;
       sessionStorage.setItem("token", token);
       state.error = null;
       state.authMessage = "Login Success ✅";
-      state.accountStatus = action.payload.flag
+      state.accountStatus = flag;
     },
     loginFailed: (state, action) => {
       state.token = null;
       state.isAuth = false;
       state.loading = false;
-      state.error = action.payload // What should I write Here
+      state.error = action.payload;
       state.authMessage = null;
     },
 

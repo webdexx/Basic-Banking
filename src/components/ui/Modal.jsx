@@ -5,7 +5,7 @@ export default function Modal({ isOpen, onClose, children }) {
 
   return createPortal(
     <div className="backdrop" onClick={onClose} style={backdropStyle}>
-      <div className="modal" onClick={e => e.stopPropagation()} style={modalStyle}>
+      <div className="modal" onClick={e => e.stopPropagation()} >
         {children}
       </div>
     </div>,
@@ -21,17 +21,4 @@ const backdropStyle = {
   alignItems: "center",
   justifyContent: "center",
   zIndex: 99999, // ✅ Always on top
-};
-
-const modalStyle = {
-  background: "#fff",
-  padding: "24px",
-  borderRadius: "12px",
-  minWidth: "200px",
-  maxWidth: "50vw",
-  maxHeight: "50vh",
-  overflowY: "auto",
-  boxShadow: "0 10px 40px rgba(0,0,0,0.3)",
-  transform: "scale(1)",
-  margin: "0 auto",
 };

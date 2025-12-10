@@ -17,17 +17,17 @@
 .header__menu {
     width: 20%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    gap: 1rem;
 }
 
 .header__icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    width: 40px;
-    margin: 0 8px;
-    font-size: 20px;
+    height: 2.5rem;
+    width: 2.5rem;
+    font-size: 1.4rem;
     font-weight: bold;
     background-color: var(--theme-blue);
     border-radius: 100%;
@@ -38,9 +38,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    width: 40px;
-    margin: 0 8px;
+    height: 2.5rem;
+    width: 2.5rem;
     font-size: 20px;
     font-weight: bold;
     border-radius: 50%;
