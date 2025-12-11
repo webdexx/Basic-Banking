@@ -12,21 +12,43 @@ const authSlice = createSlice({
     isAuth: !!getToken(),
     loading: false,
     error: null,
+    authMessage: null,
+    accountStatus: null,
   },
 
   reducers: {
+    loginStart: (state) => {
+      state.loading = true;
+      state.error = null;
+      state.isAuth = false;
+      state.authMessage = "Signing In..";
+    },
     loginSuccess: (state, action) => {
-      const { token } = action.payload;
+      const { token, flag } = action.payload;
       state.token = token;
       state.isAuth = true;
       sessionStorage.setItem("token", token);
+      state.error = null;
+      state.authMessage = "Login Success ✅";
+      state.accountStatus = flag;
+    },
+    loginFailed: (state, action) => {
+      state.token = null;
+      state.isAuth = false;
+      state.loading = false;
+      state.error = action.payload;
+      state.authMessage = null;
     },
 
-    logout: (state) => {
+    onLogout: (state) => {
       state.token = null;
       state.user = null;
       state.role = null;
       state.isAuth = false;
+      state.authMessage = "LoggedOut ⚠️";
+      state.loading = false;
+      state.email = null;
+      state.mobileNo = null;
       
       sessionStorage.removeItem("accountNumber");
       sessionStorage.removeItem("balance");
@@ -34,11 +56,9 @@ const authSlice = createSlice({
       sessionStorage.removeItem("status");
       sessionStorage.clear();
       localStorage.clear();
-      console.log("Logout Reducer Called");
-      // console.clear();
     },
   },
 });
 
-export const { loginSuccess, logout } = authSlice.actions;
+export const { loginSuccess, onLogout, loginFailed, loginStart, authMessage } = authSlice.actions;
 export default authSlice.reducer;

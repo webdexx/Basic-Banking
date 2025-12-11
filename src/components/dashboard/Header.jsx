@@ -1,12 +1,10 @@
 import Logo from "@assets/images/logo.png";
 import { Link } from "react-router-dom";
 import {
-  MdLogout,
   MdOutlineSettings,
   MdNotifications,
   MdNotificationAdd,
-  MdEmail,
-  MdMarkEmailUnread 
+  MdEmail
 } from "react-icons/md";
 import { useState } from "react";
 import './header.css'
@@ -27,10 +25,10 @@ export default function Header() {
 
         <div className="header__menu">
           {notification}
-          <Link to="/" className="header__icon">
+          <Link to="#" className="header__icon">
             <MdOutlineSettings />
           </Link>
-          <Link to="/" className="header__icon">
+          <Link to="#" className="header__icon">
             <MdEmail />
           </Link>
           <Link to="#" className="header__icon">
@@ -40,7 +38,7 @@ export default function Header() {
               <MdNotifications />
             )}
           </Link>
-          <Link to="/">
+          <Link to="#">
             <ProfileIcon />
           </Link>
         </div>

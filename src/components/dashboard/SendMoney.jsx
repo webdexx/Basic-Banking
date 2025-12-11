@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { motion as Motion } from "framer-motion";
-import "./transactionform.css";
 import Card from "./components/Card";
 
 import { createTransactions } from "@/features/transactions/createTransaction";
@@ -20,8 +19,6 @@ export default function SendMoney() {
   useEffect(() => {
     document.title = "Send Money - Basic Banking";
   }, []);
-
-  console.log("isAuth: ", isAuth);
 
   useEffect(() => {
     if (!isAuth) {
@@ -54,7 +51,6 @@ export default function SendMoney() {
       if (!result.success) {
         setErrorMessage(result.error || "Transaction failed");
       } else {
-        console.log("Result Transactions Data", result.transaction);
         setSuccessData(result.transaction); // store transaction details
       }
     } catch (err) {
@@ -67,7 +63,8 @@ export default function SendMoney() {
 
   return (
     <>
-      <div className="transaction_form_container">
+      <div className="form__container">
+        <h1>Send Money</h1>
         <Motion.form
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -75,40 +72,79 @@ export default function SendMoney() {
           id="transactionForm"
           onSubmit={handleTransaction}
         >
-          <h3>Send Money</h3>
-          {error && <p className="error-message">{error}</p>}
-          <div className="form_group">
-            <input
-              name="beneficiaryAccountNumber"
-              placeholder="Enter Beneficiary Account Number"
-              disabled={loading}
-            />
-            <input
-              name="beneficiaryIfsc"
-              placeholder="Enter beneficiary IFSC Code"
-              disabled={loading}
-            />
-          </div>
+          <div className="form-section">
+            <h2>Add Beneficiary Details</h2>
+            <div className="form-group">
+              <div className="input_container">
+                <label htmlFor="beneficiaryAccountNumber">
+                  Beneficiary Account Number
+                </label>
+                <input
+                  type="text"
+                  name="beneficiaryAccountNumber"
+                  id="beneficiaryAccountNumber"
+                  placeholder="Enter Beneficiary Account Number"
+                  disabled={loading}
+                />
+              </div>
+              <div className="input_container">
+                <label htmlFor="beneficiaryAccountNumber">
+                  Beneficiary IFSC Code
+                </label>
+                <input
+                  type="text"
+                  name="beneficiaryIfsc"
+                  placeholder="Enter beneficiary IFSC Code"
+                  disabled={loading}
+                />
+              </div>
+            </div>
 
-          <input
-            name="beneficiaryName"
-            placeholder="Enter beneficiary Name"
-            disabled={loading}
-          />
-          <input name="amount" placeholder="Enter Amount" disabled={loading} />
-          <input
-            name="description"
-            placeholder="Description"
-            disabled={loading}
-          />
+            <div className="form-group">
+              <div className="input_container">
+                <label htmlFor="beneficiaryName">Beneficiary Name</label>
+                <input
+                  type="text"
+                  name="beneficiaryName"
+                  placeholder="Enter beneficiary Name"
+                  disabled={loading}
+                />
+              </div>
+              <div className="input_container">
+                <label htmlFor="beneficiaryName">Amount</label>
+                <input
+                  type="number"
+                  name="amount"
+                  placeholder="Enter Amount"
+                  disabled={loading}
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <div className="input_container">
+                <label htmlFor="description">Description</label>
+                <textarea
+                  name="description"
+                  placeholder="Description"
+                  disabled={loading}
+                />
+              </div>
+            </div>
+          </div>
+          {error && <p className="error-message">{error}</p>}
+
           <button disabled={loading}>
             {loading ? "Submitting..." : "Send Now"}
           </button>
         </Motion.form>
+        {errorMessage && 
+          <p className="error-message">{errorMessage} 🚫</p>
+          }
       </div>
 
+
+
       <Card className="response_container">
-        {errorMessage && <p className="error-message">{errorMessage} 🚫</p>}
         {successData && (
           <div className="success_box">
             <h3>Transaction Successful 🎉</h3>
@@ -116,7 +152,8 @@ export default function SendMoney() {
               <strong>Amount Sent:</strong> ₹{successData.amount}
             </p>
             <p>
-              <strong>To Account:</strong> {successData.beneficiaryDetails.accountNumber}
+              <strong>To Account:</strong>{" "}
+              {successData.beneficiaryDetails.accountNumber}
             </p>
             <p>
               <strong>To:</strong> {successData.beneficiaryDetails.name}
@@ -126,8 +163,7 @@ export default function SendMoney() {
               {successData.balanceBefore}
             </p>
             <p>
-              <strong>Clearing Balance:</strong> ₹
-              {successData.balanceAfter}
+              <strong>Clearing Balance:</strong> ₹{successData.balanceAfter}
             </p>
             <p>
               <strong>Reference ID:</strong> {successData.transactionReference}

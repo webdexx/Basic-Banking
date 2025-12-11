@@ -5,9 +5,14 @@ import "./transaction-details.css";
 
 import {
   MdOutlineReceiptLong,
-  MdArrowOutward,
-  MdOutlineArrowDownward,
 } from "react-icons/md";
+import {
+  LuArrowDownRight,
+  LuArrowUpRight,
+  LuReceiptIndianRupee, 
+  LuAlignStartVertical,
+  LuBoxes,
+} from "react-icons/lu";
 
 export default function TransactionDetails({ transaction }) {
   const raw = transaction || null || {};
@@ -27,7 +32,7 @@ export default function TransactionDetails({ transaction }) {
   return (
     <div className="transaction__wrapper">
       <h2>
-        <MdOutlineReceiptLong className="tx_icon" /> Transaction Details
+        <LuReceiptIndianRupee className="tx_icon" /> Transaction Details
       </h2>
 
       <div className="txn-details">
@@ -39,16 +44,16 @@ export default function TransactionDetails({ transaction }) {
                 className={
                   tx.transactionType === "Money Sent" ||
                   tx.type === "Money Sent"
-                    ? "tx_red"
-                    : "tx_green"
+                    ? "pill pill-error"
+                    : "pill pill-success"
                 }
               >
                 {tx.transactionType || tx.type}{" "}
                 {tx.transactionType === "Money Sent" ||
                 tx.type === "Money Sent" ? (
-                  <MdArrowOutward />
+                  <LuArrowUpRight />
                 ) : (
-                  <MdOutlineArrowDownward />
+                  <LuArrowDownRight />
                 )}
               </span>
             </p>

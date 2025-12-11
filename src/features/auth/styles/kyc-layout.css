@@ -1,0 +1,42 @@
+:root {
+    --main-black: #191923;
+    --main-white: #ffffff;
+    --secondary-white: #fbfef9;
+    --theme-blue: #053c5e;
+    --theme-blue-secondary: #bfdbf7;
+    --accent-black: #bbbbbb;
+    --border-color: #cccccc;
+}
+
+.kyc__layout {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+    "kyc__sidebar kyc__header"
+    "kyc__sidebar kyc__container"
+    "kyc__sidebar kyc__footer"
+    ;
+    overflow: hidden;
+}
+
+.kyc__container {
+    grid-area: kyc__container;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 30px;
+}
+
+.kyc__footer {
+    grid-area: kyc__footer;
+    border-top: 1px dashed var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 20px;
+    align-items: center;
+}

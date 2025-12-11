@@ -1,164 +1,180 @@
 import Card from "./components/Card";
 import "./Overview.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAccount } from "@features/account/fetchAccount";
-import { fetchTransactions, fetchTransactionById } from "@features/transactions/fetchTransactions";
-import { MdArrowOutward, MdOutlineArrowDownward } from "react-icons/md";
+import { Suspense } from "react";
+import {
+  fetchTransactionById,
+} from "@features/transactions/fetchTransactions";
+
+import {
+  LuArrowDownRight,
+  LuArrowUpRight,
+} from "react-icons/lu";
+
 import TransactionDetails from "./TransactionView";
-// import { openAndFetchTransaction } from "@features/transactions/fetchTransactions";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 export default function Overview() {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.auth.isAuth);
 
-  useEffect(() => {
-    document.title = "Overview - Basic Banking";
-  }, []);
+  useDocumentTitle("Account Overview");
 
-  const { accountNumber, balance, blockedAmount, status, user } = useSelector(
+
+  const { accountNumber, balance, blockedAmount, user } = useSelector(
     (state) => state.account
   );
 
   const { transactions } = useSelector((state) => state.transaction);
   const [selectedTx, setSelectedTx] = useState(null);
 
-  // If you need to check authentication
-  useEffect(() => {
-    if (!isAuth) return;
-
-    dispatch(fetchAccount());
-
-    const interval = setTimeout(() => {
-      dispatch(fetchTransactions());
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [dispatch, isAuth]);
-
-  if (!isAuth) {
-    return <div>Please login to access the dashboard</div>;
-  }
-
   const handleView = async (id) => {
     setSelectedTx(null);
 
-    const tx = await dispatch(fetchTransactionById(id)); // thunk returns tx or null
+    const tx = await dispatch(fetchTransactionById(id));
 
     if (!tx) {
       return;
     }
-    // tx might be the transaction object or an object with wrapper
     setSelectedTx(tx);
-    // Optionally open modal here; we just render below
   };
 
   return (
     <>
-      <h1>Welcome to Overview</h1>
+      <h1>Welcome {user}</h1>
+      {/* <div className="card__row">
+        <Card className="hero__card">
+          <div className="hero_heading">
+            <MdOutlineBarChart className="hero_icon" />
+            <h2>Performance Analysis</h2>
+          </div>
+          <Card className="hero_info">
+            <AccountChart />
+          </Card>
+        </Card>
+        <Card className="hero__card">
+          <div className="hero_heading">
+            <MdCompareArrows className="hero_icon" />
+            <h2>Income vs Spend</h2>
+          </div>
+          <Card className="hero_info">
+            {/* <Pie data={} className="pie_chart"/> */}
+         {/*} </Card>
+        </Card>
+      </div> */}
+      <Suspense fallback={<div>Loading...</div>} >
       <div className="card__row">
         <Card className="overview__info__card">
-          <div id="balance_info">
-            <section className="balance_heading">Account</section>
-            <span>Available Balance: ₹{balance > 0 ? balance : 0}/-</span>
-            <span>Blocked Amount: ₹{blockedAmount}/-</span>
+          <div>
+            <span className="heading">Account Info</span>
+            <div id="balance_info">
+              <span>Available Balance: ₹{balance > 0 ? balance : 0}/-</span>
+              <span>Blocked Amount: ₹{blockedAmount}/-</span>
+            </div>
           </div>
         </Card>
         <Card className="overview__info__card">
-          <div id="balance_info">
-            <section className="balance_heading">
-              Fixed Deposit/Reccuring Deposits
-            </section>
-            <section className="available_balance">₹{blockedAmount}/-</section>
+          <div>
+            <span className="heading">Active Products</span>
+            <div id="balance_info">
+              <span>₹{blockedAmount}/-</span>
+            </div>
           </div>
         </Card>
         <Card className="overview__info__card">
-          <div id="balance_info">
-            <section className="balance_heading">Account Details</section>
-            <section>
+          <div>
+            <span className="heading">Account Details</span>
+            <div id="balance_info">
               <span>Account Number: {accountNumber} </span>
               <span
                 className={status === "ACTIVE" ? "active_acc" : "inactive_acc"}
               >
                 {status}
               </span>
-            </section>
+            </div>
           </div>
         </Card>
       </div>
       <div className="card__row">
-        <Card className="overview__transactions__card">
-          <h1>Recent 5 Transactions</h1>
-          <div className="transaction__table">
-            <table>
-              <thead>
-                <tr>
-                  <th>Sender/Receiver</th>
-                  <th>Transaction Type</th>
-                  <th>Amount</th>
-                  <th>Description</th>
-                  <th>Clearing Balance</th>
-                  <th>Reference Number</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {transactions?.length > 0 ? (
-                  transactions.slice(0, 5).map((tx) => {
-                    const isIncoming =
-                      tx.type === "DEPOSIT" || tx.type === "TRANSFER_IN";
-                    console.log("Is Incoming or not", isIncoming);
-                    return (
-                      <tr key={tx._id}>
-                        <td>
-                          {tx.beneficiaryDetails
-                            ? tx.beneficiaryDetails.name
-                            : `${user} (self)`}
-                        </td>
-                        <td className={isIncoming ? "tx__green" : "tx__red"}>
-                          {isIncoming ? (
-                            <MdOutlineArrowDownward />
-                          ) : (
-                            <MdArrowOutward />
-                          )}{" "}
-                          {tx.type}
-                        </td>
-                        <td>{tx.amount}</td>
-                        <td>{tx.description}</td>
-                        <td>{tx.balanceAfter}</td>
-                        <td>{tx.transactionReference}</td>
-
-                        <td>
-                          <button
-                            onClick={() => handleView(tx._id)}
-                          >
-                            View
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })
-                ) : (
+        {transactions.length > 0 && (
+          <Card className="overview__transactions__card">
+            <h1>Recent 5 Transactions</h1>
+            <div className="">
+              <table>
+                <thead>
                   <tr>
-                    <td colSpan="6" style={{ textAlign: "center" }}>
-                      No Transactions Found
-                    </td>
+                    <th>Sender/Receiver</th>
+                    <th>Transaction Type</th>
+                    <th>Amount</th>
+                    <th>Action</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
-            {/* show details (modal/panel) */}
-      {selectedTx && (
-        <div className="modal-backdrop">
-          <div className="modal">
-            <button className="close-btn" onClick={() => setSelectedTx(null)}>Close</button>
-            <TransactionDetails transaction={selectedTx} />
-          </div>
-        </div>
-      )}
-          </div>
-        </Card>
+                </thead>
+                <tbody>
+                  {transactions?.length > 0 ? (
+                    transactions.slice(0, 5).map((tx) => {
+                      const isIncoming =
+                        tx.type === "DEPOSIT" || tx.type === "TRANSFER_IN";
+                      return (
+                        <tr key={tx._id}>
+                          <td>
+                            {tx.beneficiaryDetails
+                              ? tx.beneficiaryDetails.name
+                              : `${user} (self)`}
+                          </td>
+                          <td>
+                            <span
+                              className={
+                                isIncoming
+                                  ? "pill pill-success"
+                                  : "pill pill-error"
+                              }
+                            >
+                              {isIncoming ? "Received " : "Sent "} {isIncoming ? (
+                                <LuArrowDownRight />
+                              ) : (
+                                <LuArrowUpRight />
+                              )}
+                            </span>
+                          </td>
+                          <td>₹{tx.amount}/-</td>
+
+                          <td>
+                            <button className="primary-btn" onClick={() => handleView(tx._id)}>
+                              View
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan="6" style={{ textAlign: "center" }}>
+                        No Transactions Found
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+              {/* show details (modal/panel) */}
+              {selectedTx && (
+                <div className="modal-backdrop">
+                  <div className="modal">
+                    <TransactionDetails transaction={selectedTx} />
+                    <button
+                      className="close-btn"
+                      onClick={() => setSelectedTx(null)}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </Card>
+        )}
+        
       </div>
+      </Suspense>
     </>
   );
 }

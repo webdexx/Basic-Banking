@@ -1,36 +1,47 @@
-import Card from "./components/Card";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTransactions } from "@features/transactions/fetchTransactions";
-import { MdArrowOutward, MdOutlineArrowDownward } from "react-icons/md";
+import { LuArrowDownRight, LuArrowUpRight } from "react-icons/lu";
+
+import TransactionDetails from "./TransactionView";
+import Card from "./components/Card";
+import {
+  fetchTransactions,
+  fetchTransactionById,
+} from "@features/transactions/fetchTransactions";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 export default function Transactions() {
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth.isAuth);
-  
-  useEffect(() => {
-    document.title = "Transactions - Basic Banking";
-  }, []);
 
-  const {
-    transactions = [],
-    loading,
-    error,
-  } = useSelector((state) => state.transaction);
+  useDocumentTitle("Transactions");
 
-  // If you need to check authentication
+  const { transactions = [] } = useSelector((state) => state.transaction);
+
+  const [selectedTx, setSelectedTx] = useState(null);
+
   useEffect(() => {
     if (!isAuth) return;
-    const interval = setTimeout(() => {
+    const t = setTimeout(() => {
       dispatch(fetchTransactions());
     }, 3000);
 
-    return () => clearInterval(interval);
+    return () => clearTimeout(t);
   }, [dispatch, isAuth]);
 
   if (!isAuth) {
     return <div>Please login to access the dashboard</div>;
   }
+
+  const handleView = async (id) => {
+    const tx = await dispatch(fetchTransactionById(id));
+
+    if (!tx) {
+      return;
+    }
+
+    setSelectedTx(tx);
+  };
 
   return (
     <>
@@ -38,9 +49,7 @@ export default function Transactions() {
       <div className="card__row">
         <Card className="overview__transactions__card">
           <h1>Top Transactions</h1>
-          <div className="transaction__table">
-            {loading && <p>Loading...</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
+          <div className="">
             <table>
               <thead>
                 <tr>
@@ -55,21 +64,30 @@ export default function Transactions() {
                   transactions.map((tx) => {
                     const isIncoming =
                       tx.type === "DEPOSIT" || tx.type === "TRANSFER_IN";
-                      console.log("Is Incoming or not", isIncoming);
                     return (
                       <tr key={tx._id}>
-                        <td className={isIncoming ? "tx__green" : "tx__red"}>
-                          {isIncoming ? (
-                            <MdOutlineArrowDownward />
-                          ) : (
-                            <MdArrowOutward />
-                          )}{" "}
-                          {tx.type}
+                        <td>
+                          <span
+                            className={
+                              isIncoming
+                                ? "pill pill-success"
+                                : "pill pill-error"
+                            }
+                          >
+                            {isIncoming ? "Received" : "Sent"}
+                            {isIncoming ? (
+                              <LuArrowDownRight />
+                            ) : (
+                              <LuArrowUpRight />
+                            )}{" "}
+                          </span>
                         </td>
                         <td>{tx.amount}</td>
                         <td>₹{tx.balanceAfter}</td>
                         <td>
-                          <button>View</button>
+                          <button onClick={() => handleView(tx._id)}>
+                            View
+                          </button>
                         </td>
                       </tr>
                     );
@@ -86,6 +104,17 @@ export default function Transactions() {
           </div>
         </Card>
       </div>
+      {/* show details (modal/panel) */}
+      {selectedTx && (
+        <div className="modal-backdrop">
+          <div className="modal">
+            <TransactionDetails transaction={selectedTx} />
+            <button className="close-btn" onClick={() => setSelectedTx(null)}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

@@ -7,7 +7,7 @@ import {
   setLatestTransaction,
   setTransactionLoading
 } from "./transactionsSlice";
-import { openTransactionModal } from "./transactionViewslice";
+import { openTransactionModal } from "./transactionViewSlice";
 
 export const fetchTransactions = () => async (dispatch) => {
   try {
@@ -21,16 +21,12 @@ export const fetchTransactions = () => async (dispatch) => {
 
     const res = await axios.get("http://localhost:3000/transactions/show", {
       headers: {
-        // If backend expects 'Bearer <token>', change accordingly:
-        // Authorization: `Bearer ${token}`
         Authorization: `${token}`,
         "Content-Type": "application/json",
       },
     });
 
-    // res.data.transactions is an array in your sample response
     if (res.data && Array.isArray(res.data.transactions)) {
-      // Optionally sort by createdAt if backend doesn't return sorted list
       const txs = res.data.transactions.slice().sort((a, b) =>
         new Date(b.createdAt) - new Date(a.createdAt)
       );
@@ -91,7 +87,6 @@ export const fetchTransactionById = (id) => async (dispatch) => {
     return null;
   } finally {
     // optional: nothing
-    console.log("Evrything loaded");
   }
 };
 
