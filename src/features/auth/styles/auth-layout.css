@@ -35,22 +35,12 @@
   width: 65%;
 }
 
-input {
+.auth__form__window form input {
   outline: none;
   padding: 8px 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 100%;
-}
-
-button {
-  cursor: pointer;
-  background-color: var(--theme-blue);
-  border: none;
-  padding: 12px 10px;
-  color: var(--secondary-white);
-  border-radius: 5px;
-  font-size: 16px;
 }
 
 .authLink {

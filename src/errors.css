@@ -1,0 +1,40 @@
+.form-error {
+  color: red;
+  /* background-color: rgba(255, 0, 0, 0.151); */
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Messages */
+.success-message {
+  padding: 16px;
+  background-color: #ecfdf5;
+  border-left: 4px solid var(--success-color);
+  border-radius: 6px;
+  color: #065f46;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  padding: 16px;
+  background-color: #fef2f2;
+  border-left: 4px solid var(--error-color);
+  border-radius: 6px;
+  color: #7f1d1d;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.info-message {
+  padding: 16px;
+  background-color: #eff6ff;
+  border-left: 4px solid var(--info-color);
+  border-radius: 6px;
+  color: #1e40af;
+  font-size: 14px;
+  margin-bottom: 20px;
+}

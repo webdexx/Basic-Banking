@@ -13,7 +13,7 @@ const authSlice = createSlice({
     loading: false,
     error: null,
     authMessage: null,
-    accountStatus: null
+    accountStatus: null,
   },
 
   reducers: {
@@ -47,6 +47,8 @@ const authSlice = createSlice({
       state.isAuth = false;
       state.authMessage = "LoggedOut ⚠️";
       state.loading = false;
+      state.email = null;
+      state.mobileNo = null;
       
       sessionStorage.removeItem("accountNumber");
       sessionStorage.removeItem("balance");

@@ -32,15 +32,6 @@
     margin: 2px 4px 0 0;
 }
 
-.tx_green {
-    color: green;
-    font-weight: bold;
-}
-.tx_red {
-    color: red;
-    font-weight: bold;
-}
-
 .tx_description {
     border: 1px dashed var(--border-color);
     text-align: left !important;

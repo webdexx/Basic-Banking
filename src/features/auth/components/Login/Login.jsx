@@ -22,26 +22,28 @@ export default function Login() {
   }, []);
 
   useEffect(() => {
-    if (isAuth) {
-      console.log("User Authenticated. Account Status:", accountStatus);
+    if (isAuth && accountStatus) {
+      const timer = setTimeout(() => {
+        switch (accountStatus) {
+          case "APPROVED":
+            navigate("/dashboard");
+            break;
+          case "PENDING":
+            navigate("/kyc/personal-info");
+            break;
+          case "REJECTED":
+            navigate("/kyc/review");
+            break;
+          case "PENDING_REVIEW":
+            navigate("/kyc/review");
+            break;
+          default:
+            navigate("/kyc/personal-info");
+            break;
+        }
+      }, 200);
 
-      switch (accountStatus) {
-        case "APPROVED":
-          navigate("/dashboard");
-          break;
-        case "PENDING":
-          navigate("/kyc/personal-info");
-          break;
-        case "REJECTED":
-          navigate("/kyc/review");
-          break;
-        case "PENDING_REVIEW":
-          navigate("/kyc/review");
-          break;
-        default:
-          navigate("/kyc/personal-info");
-          break;
-      }
+      return () => clearTimeout(timer);
     }
   }, [isAuth, accountStatus, navigate]);
 
@@ -67,10 +69,9 @@ export default function Login() {
       setFormError(error.message || "Login Failed. Try Again");
       // Show error message to user
     } finally {
-      console.log("Loaded");
+      //Do Nothing
     }
   };
-
 
   const handleLinkClick = (e) => {
     console.log("Link clicked!", e);
@@ -111,11 +112,7 @@ export default function Login() {
 
       <p className="signup-link">
         Don't have an account?
-        <Link 
-          to="/register" 
-          onClick={handleLinkClick}
-          className="authLink"
-        >
+        <Link to="/register" onClick={handleLinkClick} className="authLink">
           Create a new Account
         </Link>
       </p>

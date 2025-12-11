@@ -7,6 +7,7 @@ import registerUserReducer from "@features/auth/components/Register/registerSlic
 import kycReducer from "@features/auth/components/kyc/kycSlice";
 import postPersonalInfoReducer from "@/features/auth/components/kyc/postPersonalInfoSlice";
 import postProfessionalInfoReducer from "@/features/auth/components/kyc/postProfessionalInfoSlice";
+import cardsReducer from "@/features/cards/cardSlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     kyc: kycReducer,
     postPersonalInfo: postPersonalInfoReducer,
     postProfessionalInfo: postProfessionalInfoReducer,
+    cards: cardsReducer,
     ui: {
       modal: transactionViewReducer,
     },

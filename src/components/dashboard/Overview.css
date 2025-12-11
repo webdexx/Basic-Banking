@@ -15,7 +15,7 @@
 }
 
 .overview__info__card {
-
+  padding: 20px;
 }
 
 #balance_info {
@@ -105,8 +105,9 @@
 .hero__card {
   background-color: var(--theme-blue);
   padding: 10px 30px;
-  max-width: 35%;
+  width: 40%;
   color: var(--secondary-white);
+  overflow: hidden;
 }
 
 .hero_heading {
@@ -132,6 +133,7 @@
   padding: 20px;
   background-color: var(--main-white);
   color: #191923;
-  width: 300px;
+  width: 90%;
   height: 300px;
+  overflow: hidden;
 }

@@ -314,7 +314,7 @@ export default function PersonalInfo() {
                     </label>
                   </div>
                   {errors.gender && (
-                    <span className="login-error">**{errors.gender}**</span>
+                    <span className="form-error">*{errors.gender}</span>
                   )}
                 </div>
                 <div className="input_container">
@@ -336,7 +336,7 @@ export default function PersonalInfo() {
                     }}
                   />
                   {errors.dob && (
-                    <span className="login-error">**{errors.dob}**</span>
+                    <span className="form-error">*{errors.dob}</span>
                   )}
                 </div>
                 <div className="input_container">
@@ -358,8 +358,8 @@ export default function PersonalInfo() {
                     }}
                   />
                   {errors.nationality && (
-                    <span className="login-error">
-                      **{errors.nationality}**
+                    <span className="form-error">
+                      *{errors.nationality}
                     </span>
                   )}
                 </div>
@@ -417,7 +417,7 @@ export default function PersonalInfo() {
                       }}
                     />
                     {errors.permStreet && (
-                      <span className="login-error">
+                      <span className="form-error">
                         **{errors.permStreet}**
                       </span>
                     )}
@@ -452,7 +452,7 @@ export default function PersonalInfo() {
                       }}
                     />
                     {errors.permCity && (
-                      <span className="login-error">**{errors.permCity}**</span>
+                      <span className="form-error">**{errors.permCity}**</span>
                     )}
                   </div>
 
@@ -519,7 +519,7 @@ export default function PersonalInfo() {
 
                     </select>
                     {errors.permState && (
-                      <span className="login-error">
+                      <span className="form-error">
                         **{errors.permState}**
                       </span>
                     )}
@@ -573,7 +573,7 @@ export default function PersonalInfo() {
                       }}
                     />
                     {errors.permPinCode && (
-                      <span className="login-error">
+                      <span className="form-error">
                         **{errors.permPinCode}**
                       </span>
                     )}
