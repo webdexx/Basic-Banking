@@ -47,7 +47,7 @@ export default function Transactions() {
     <>
       <h1>Welcome to Overview</h1>
       <div className="card__row">
-        <Card className="overview__transactions__card">
+        <Card className="table__container__card">
           <h1>Top Transactions</h1>
           <div className="">
             <table>
@@ -85,7 +85,7 @@ export default function Transactions() {
                         <td>{tx.amount}</td>
                         <td>₹{tx.balanceAfter}</td>
                         <td>
-                          <button onClick={() => handleView(tx._id)}>
+                          <button onClick={() => handleView(tx._id)}  className="primary-btn">
                             View
                           </button>
                         </td>

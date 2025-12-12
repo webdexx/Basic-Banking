@@ -30,6 +30,17 @@ h1 {
   transform: translateY(0);
 }
 
+.tab-btn {
+    background-color: var(--main-white);
+    border: 1px dashed #333;
+    font-size: 18px;
+    margin: 10px 10px 0px 0px;
+}
+
+.tab-btn:hover {
+    background-color: #f3f3f3;
+}
+
 /* ======== Form Styles ======== */
 
 /* label {
@@ -575,4 +586,16 @@ tbody tr:last-child td {
   background-color: #3b82f6;
   color: var(--main-white);
   border: 1px solid #2563eb;
+}
+
+/* Containers */
+
+.left__aligned__container {
+  padding-left: none;
+  margin: 0;
+}
+
+.table__container__card {
+  width: 94%;
+  padding: 10px 50px;
 }

@@ -2,17 +2,6 @@
     width: 90%;
 }
 
-.tab-btn {
-    background-color: var(--main-white);
-    border: 1px dashed #333;
-    font-size: 18px;
-    margin: 10px 10px 0px 0px;
-}
-
-.tab-btn:hover {
-    background-color: #f3f3f3;
-}
-
 .user-profile {
     display: flex;
     flex-direction: column;

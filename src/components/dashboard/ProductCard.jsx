@@ -4,6 +4,8 @@ import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { fetchCard } from "@/features/cards/fetchCards";
 import Card from "./components/Card";
 
+import "./product-card.css";
+
 export default function ProductCard() {
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -26,29 +28,52 @@ export default function ProductCard() {
   return (
     <>
       <h1>Manage Cards</h1>
-      <button className="tab-btn" onClick={() => setCardKind("Postpaid")}>Postpaid Cards</button>
-      <button className="tab-btn" onClick={() => setCardKind("Prepaid")}>Postpaid Cards</button>
+      <button className="tab-btn" onClick={() => setCardKind("Postpaid")}>
+        Postpaid Cards
+      </button>
+      <button className="tab-btn" onClick={() => setCardKind("Prepaid")}>
+        Postpaid Cards
+      </button>
 
-      {cardKind === "Prepaid" && (
-        <Card>
-          <span>Card No. {cardNo}</span>
-          <span>Limit: {limit}</span>
-          <span>Card Type: {cardType}</span>
-          <span>
-            Expiry: {expiryMonth}/{expiryYear}
-          </span>
-        </Card>
-      )}
-      {cardKind === "Postpaid" && (
-        <Card>
-          <span>Postpaid Card No. {cardNo}</span>
-          <span>Limit: {limit}</span>
-          <span>Card Type: {cardType}</span>
-          <span>
-            Expiry: {expiryMonth}/{expiryYear}
-          </span>
-        </Card>
-      )}
+      <div className="left__aligned__container">
+        {cardKind === "Prepaid" && (
+          <Card className="table__container__card">
+            <div className="card__img"></div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Card</th>
+                  <th>Type</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{cardNo}</td>
+                </tr>
+              </tbody>
+            </table>
+            <span>Card No. </span>
+            <span>Limit: {limit}</span>
+            <span>Card Type: {cardType}</span>
+            <span>
+              Expiry: {expiryMonth}/{expiryYear}
+            </span>
+          </Card>
+        )}
+        {cardKind === "Postpaid" && (
+          <Card className="table__container__card">
+            <span>Postpaid Card No. {cardNo}</span>
+            <span>Limit: {limit}</span>
+            <span>Card Type: {cardType}</span>
+            <span>
+              Expiry: {expiryMonth}/{expiryYear}
+            </span>
+          </Card>
+        )}
+      </div>
     </>
   );
 }

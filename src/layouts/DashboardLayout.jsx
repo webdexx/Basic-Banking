@@ -6,6 +6,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchAccount } from '@/features/account/fetchAccount';
 import { fetchTransactions } from '@/features/transactions/fetchTransactions';
+import { fetchCard } from '@/features/cards/fetchCards';
 
 export default function DashboardLayout() {
 const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const { isAuth } = useSelector((state) => state.auth);
     }
 
     dispatch(fetchAccount());
+    dispatch(fetchCard());
   }, [dispatch, isAuth, navigate]);
   
 
