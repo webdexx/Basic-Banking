@@ -1,7 +1,15 @@
 /* ======== Text Styles ======== */
 
-h1 {
+.blue-text {
   color: var(--theme-blue);
+}
+
+.white-text {
+  color: var(--main-white);
+}
+
+h1 {
+  
   margin-bottom: 30px;
   font-size: 28px;
   border-bottom: 3px solid var(--theme-blue);

@@ -133,7 +133,7 @@ export default function SendMoney() {
           </div>
           {error && <p className="error-message">{error}</p>}
 
-          <button disabled={loading}>
+          <button disabled={loading} className="primary-btn" style={{ width: "20%"}}>
             {loading ? "Submitting..." : "Send Now"}
           </button>
         </Motion.form>
@@ -144,8 +144,9 @@ export default function SendMoney() {
 
 
 
-      <Card className="response_container">
+      
         {successData && (
+          <Card className="response_container">
           <div className="success_box">
             <h3>Transaction Successful 🎉</h3>
             <p>
@@ -169,8 +170,9 @@ export default function SendMoney() {
               <strong>Reference ID:</strong> {successData.transactionReference}
             </p>
           </div>
+          </Card>
         )}
-      </Card>
+      
     </>
   );
 }

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { fetchCard } from "@/features/cards/fetchCards";
 import Card from "./components/Card";
+
+import { LuEye } from "react-icons/lu";
 
 import "./product-card.css";
 
 export default function ProductCard() {
-  const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth.isAuth);
 
   const [cardKind, setCardKind] = useState("Prepaid");
@@ -22,55 +22,95 @@ export default function ProductCard() {
 
   useEffect(() => {
     if (!isAuth) return;
-    dispatch(fetchCard());
-  }, [isAuth, dispatch]);
+  }, [isAuth]);
 
   return (
     <>
       <h1>Manage Cards</h1>
       <button className="tab-btn" onClick={() => setCardKind("Postpaid")}>
-        Postpaid Cards
+        Credit Card
       </button>
       <button className="tab-btn" onClick={() => setCardKind("Prepaid")}>
-        Postpaid Cards
+        Debit Card
       </button>
 
       <div className="left__aligned__container">
         {cardKind === "Prepaid" && (
-          <Card className="table__container__card">
-            <div className="card__img"></div>
+          <Card className="table__container__card card__info__container">
+            <div className="card__img debit__card">
+              <div className="card__chip"></div>
+              <div className="card__logo"></div>
+              <div className="card__number">{cardNo}</div>
+            </div>
 
             <table>
               <thead>
                 <tr>
                   <th>Card</th>
                   <th>Type</th>
+                  <th>Expiry</th>
                   <th>Action</th>
                 </tr>
               </thead>
 
               <tbody>
                 <tr>
-                  <td>{cardNo}</td>
+                  <td>
+                    <span className="pill pill-info">{cardNo}</span>
+                  </td>
+                  <td>{cardType}</td>
+                  <td>
+                    <span className="pill pill-warning">
+                      {expiryMonth}/{expiryYear}
+                    </span>
+                  </td>
+                  <td>
+                    <button className="primary-btn">
+                      <LuEye />
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
-            <span>Card No. </span>
-            <span>Limit: {limit}</span>
-            <span>Card Type: {cardType}</span>
-            <span>
-              Expiry: {expiryMonth}/{expiryYear}
-            </span>
           </Card>
         )}
         {cardKind === "Postpaid" && (
-          <Card className="table__container__card">
-            <span>Postpaid Card No. {cardNo}</span>
-            <span>Limit: {limit}</span>
-            <span>Card Type: {cardType}</span>
-            <span>
-              Expiry: {expiryMonth}/{expiryYear}
-            </span>
+          <Card className="table__container__card card__info__container">
+            <div className="card__img credit__card">
+              <div className="card__chip"></div>
+              <div className="card__logo"></div>
+              <div className="card__number"></div>
+            </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Card</th>
+                  <th>Type</th>
+                  <th>Expiry</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <span className="pill pill-info">{cardNo}</span>
+                  </td>
+                  <td>{cardType}</td>
+                  <td>
+                    <span className="pill pill-warning">
+                      {expiryMonth}/{expiryYear}
+                    </span>
+                  </td>
+                  <td>
+                    <button className="primary-btn">
+                      <LuEye />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </Card>
         )}
       </div>

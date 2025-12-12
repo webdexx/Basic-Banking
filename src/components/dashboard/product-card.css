@@ -1,6 +1,60 @@
+.card__info__container {
+    display: flex;
+    flex-direction: column;
+}
+
 .card__img {
-    background-color: rgb(32, 31, 31);
     width: 300px;
     height: 170px;
     border-radius: 15px;
+    margin: 1rem auto 2.5rem auto;
+    position: relative;
+    top: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.credit__card {
+    background-color: rgb(32, 31, 31);
+}
+
+.debit__card {
+    background: var(--theme-blue);
+    background: (90deg,rgba(2, 0, 36, 1) 0%, rgba(5, 60, 94, 1) 35%);
+}
+
+.card__chip {
+    background-color: gold;
+    width: 50px;
+    height: 40px;
+    border-radius: 10px;
+    position: relative;
+    top: 1.8rem;
+    left: 1.5rem;
+}
+
+.card__logo {
+    background: url("../../assets/images/logo-white.png");
+    background-size: contain;
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    position: absolute;
+    top: 1.8rem;
+    right: 1.5rem;
+}
+
+.card__number {
+    position: absolute;
+    width: 80%;
+    height: 20px;
+    bottom: 3.2rem;
+    left: 1.9rem;
+    font-weight: 450;
+    letter-spacing: 4px;
+    color: var(--secondary-white);
+}
+
+.card__img:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 11px -4px rgba(0, 0, 0, 0.35);
 }
