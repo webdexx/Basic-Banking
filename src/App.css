@@ -571,6 +571,128 @@ tbody tr:last-child td {
   border: 1px solid #bfdbfe;
 }
 
+/* Status Pills */
+.pill-success {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.pill-error {
+  background-color: #fee2e2;
+  color: #7f1d1d;
+  border: 1px solid #fecaca;
+}
+
+.pill-warning {
+  background-color: #fef3c7;
+  color: #78350f;
+  border: 1px solid #fde68a;
+}
+
+.pill-info {
+  background-color: #dbeafe;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+}
+
+/* Additional Color Variants */
+.pill-primary {
+  background-color: #dbeafe;
+  color: #1e3a8a;
+  border: 1px solid #93c5fd;
+}
+
+.pill-secondary {
+  background-color: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.pill-purple {
+  background-color: #f3e8ff;
+  color: #581c87;
+  border: 1px solid #d8b4fe;
+}
+
+.pill-pink {
+  background-color: #fce7f3;
+  color: #831843;
+  border: 1px solid #f9a8d4;
+}
+
+.pill-indigo {
+  background-color: #e0e7ff;
+  color: #3730a3;
+  border: 1px solid #c7d2fe;
+}
+
+.pill-teal {
+  background-color: #ccfbf1;
+  color: #115e59;
+  border: 1px solid #99f6e4;
+}
+
+.pill-orange {
+  background-color: #ffedd5;
+  color: #7c2d12;
+  border: 1px solid #fed7aa;
+}
+
+.pill-lime {
+  background-color: #ecfccb;
+  color: #3f6212;
+  border: 1px solid #d9f99d;
+}
+
+.pill-cyan {
+  background-color: #cffafe;
+  color: #164e63;
+  border: 1px solid #a5f3fc;
+}
+
+.pill-rose {
+  background-color: #ffe4e6;
+  color: #881337;
+  border: 1px solid #fecdd3;
+}
+
+.pill-amber {
+  background-color: #fef3c7;
+  color: #78350f;
+  border: 1px solid #fde68a;
+}
+
+.pill-emerald {
+  background-color: #d1fae5;
+  color: #064e3b;
+  border: 1px solid #a7f3d0;
+}
+
+.pill-sky {
+  background-color: #e0f2fe;
+  color: #0c4a6e;
+  border: 1px solid #bae6fd;
+}
+
+.pill-violet {
+  background-color: #ede9fe;
+  color: #5b21b6;
+  border: 1px solid #ddd6fe;
+}
+
+.pill-fuchsia {
+  background-color: #fae8ff;
+  color: #701a75;
+  border: 1px solid #f0abfc;
+}
+
+.pill-neutral {
+  background-color: #f5f5f5;
+  color: #404040;
+  border: 1px solid #d4d4d4;
+}
+
 /* Alternative Darker Variants */
 .pill-success-dark {
   background-color: #10b981;
@@ -594,6 +716,102 @@ tbody tr:last-child td {
   background-color: #3b82f6;
   color: var(--main-white);
   border: 1px solid #2563eb;
+}
+
+.pill-primary-dark {
+  background-color: #3b82f6;
+  color: var(--main-white);
+  border: 1px solid #2563eb;
+}
+
+.pill-secondary-dark {
+  background-color: #6b7280;
+  color: var(--main-white);
+  border: 1px solid #4b5563;
+}
+
+.pill-purple-dark {
+  background-color: #a855f7;
+  color: var(--main-white);
+  border: 1px solid #9333ea;
+}
+
+.pill-pink-dark {
+  background-color: #ec4899;
+  color: var(--main-white);
+  border: 1px solid #db2777;
+}
+
+.pill-indigo-dark {
+  background-color: #6366f1;
+  color: var(--main-white);
+  border: 1px solid #4f46e5;
+}
+
+.pill-teal-dark {
+  background-color: #14b8a6;
+  color: var(--main-white);
+  border: 1px solid #0d9488;
+}
+
+.pill-orange-dark {
+  background-color: #f97316;
+  color: var(--main-white);
+  border: 1px solid #ea580c;
+}
+
+.pill-lime-dark {
+  background-color: #84cc16;
+  color: var(--main-white);
+  border: 1px solid #65a30d;
+}
+
+.pill-cyan-dark {
+  background-color: #06b6d4;
+  color: var(--main-white);
+  border: 1px solid #0891b2;
+}
+
+.pill-rose-dark {
+  background-color: #f43f5e;
+  color: var(--main-white);
+  border: 1px solid #e11d48;
+}
+
+.pill-amber-dark {
+  background-color: #f59e0b;
+  color: var(--main-white);
+  border: 1px solid #d97706;
+}
+
+.pill-emerald-dark {
+  background-color: #10b981;
+  color: var(--main-white);
+  border: 1px solid #059669;
+}
+
+.pill-sky-dark {
+  background-color: #0ea5e9;
+  color: var(--main-white);
+  border: 1px solid #0284c7;
+}
+
+.pill-violet-dark {
+  background-color: #8b5cf6;
+  color: var(--main-white);
+  border: 1px solid #7c3aed;
+}
+
+.pill-fuchsia-dark {
+  background-color: #d946ef;
+  color: var(--main-white);
+  border: 1px solid #c026d3;
+}
+
+.pill-neutral-dark {
+  background-color: #737373;
+  color: var(--main-white);
+  border: 1px solid #525252;
 }
 
 /* Containers */
