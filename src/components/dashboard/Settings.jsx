@@ -132,39 +132,39 @@ export default function Settings() {
               <div className="settings__icon">
                 <LuKeyRound size={54} />
               </div>
-              <button className="pill-success-dark">Change Password</button>
+              <button className="pill-success-dark">Password & Security</button>
             </Card>
             <Card className="settings__card pill-warning">
               <div className="settings__icon">
-                <LuIndianRupee size={54} />
+                <LuCrown size={54} />
               </div>
-              <button className="pill-warning-dark">Change Password</button>
+              <button className="pill-warning-dark">Get Premium</button>
             </Card>
             <Card className="settings__card pill-error">
               <div className="settings__icon">
                 <LuMap size={54} />
               </div>
-              <button className="pill-error-dark">Change Password</button>
+              <button className="pill-error-dark">Update Address</button>
             </Card>
           </div>
           <div style={{ display: "flex", gap: "2rem" }}>
             <Card className="settings__card pill-info">
               <div className="settings__icon">
-                <LuMap size={54} />
+                <LuIndianRupee size={54} />
               </div>
-              <button className="pill-info-dark">Change Password</button>
+              <button className="pill-info-dark">Money Management</button>
             </Card>
             <Card className="settings__card pill-purple">
               <div className="settings__icon">
-                <LuMap size={54} />
+                <LuNewspaper size={54} />
               </div>
-              <button className="pill-purple-dark">Change Password</button>
+              <button className="pill-purple-dark">Reports</button>
             </Card>
             <Card className="settings__card pill-neutral">
               <div className="settings__icon">
-                <LuMap size={54} />
+                <LuSquareCheckBig size={54} />
               </div>
-              <button className="pill-neutral-dark">Change Password</button>
+              <button className="pill-neutral-dark">Request KYC Verification</button>
             </Card>
           </div>
         </div>
