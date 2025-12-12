@@ -5,7 +5,7 @@
 .tab-btn {
     background-color: var(--main-white);
     border: 1px dashed #333;
-    font-size: 18px;
+    font-size: 1rem;
     margin: 10px 10px 0px 0px;
 }
 
