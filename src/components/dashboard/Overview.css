@@ -16,6 +16,7 @@
 
 .overview__info__card {
   padding: 20px;
+  margin: 10px 20px 10px 0px;
 }
 
 #balance_info {
@@ -33,11 +34,6 @@
 .available_balance {
   font-size: 26px;
   font-weight: 380;
-}
-
-.overview__transactions__card {
-  width: 94%;
-  padding: 10px 50px;
 }
 
 .overview_card {

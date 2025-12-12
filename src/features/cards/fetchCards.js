@@ -29,7 +29,7 @@ export const fetchCard = () => async (dispatch) => {
       console.log(cardData);
       dispatch(fetchCardData(cardData));
     } else {
-      console.error("No accountDetails in response:", res.data.message);
+      console.error("No Cards in response:", res.data.message);
     }
   } catch (err) {
     console.error("Error fetching account:", err);

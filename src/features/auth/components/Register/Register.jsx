@@ -162,7 +162,7 @@ export default function Register() {
           <span className="login-error">**{errors.password}**</span>
         )}
         {isLoading && <p className="login-msg">Sending Data to the server</p>}
-        <button style={{ width: "100%" }}>Create Account</button>
+        <button style={{ width: "100%" }} className="primary-btn">Create Account</button>
         {error && <p className="login-error">**{error}**</p>}
       </Motion.form>
       <p className="signup-link">

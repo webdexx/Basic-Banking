@@ -10,7 +10,19 @@ const kycSlice = createSlice({
     documents: null,
     overallStatus: null,
     loaded: false,
-    userId: null
+    userId: null,
+    userFullName: null,
+    userEmail: null,
+    userMobile: null,
+    userStatus: null,
+    userPermanentAddress: null,
+    userCorrespondenceAddress: null,
+    userGender: null,
+    userDOB: null,
+    userPAN: null,
+    userAadhar: null,
+    userOccupation: null,
+    userMonthlyIncome: null,
   },
 
   reducers: {
@@ -25,12 +37,41 @@ const kycSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.userId = userId;
-      if(userKycStatus){
-      state.personalInfo = userKycStatus.personalInfo;
-      state.documents = userKycStatus.documents;
-      state.overallStatus = userKycStatus.overallStatus;
-      state.loaded = true;
+      if (userKycStatus) {
+        state.personalInfo = userKycStatus.personalInfo;
+        state.documents = userKycStatus.documents;
+        state.overallStatus = userKycStatus.overallStatus;
+        state.loaded = true;
       }
+    },
+
+    fetchFullKycSuccess: (state, action) => {
+      const {
+        userFullname,
+        userEmail,
+        userMobile,
+        userStatus,
+        userPermanentAddress,
+        userCorrespondenceAddress,
+        userPAN,
+        userAadhar,
+        userDOB,
+        userGender,
+        userOccupation,
+        userMonthlyIncome,
+      } = action.payload;
+      state.userFullName = userFullname;
+      state.userEmail = userEmail;
+      state.userMobile = userMobile;
+      state.userStatus = userStatus;
+      state.userPermanentAddress = userPermanentAddress;
+      state.userCorrespondenceAddress = userCorrespondenceAddress;
+      state.userGender = userGender;
+      state.userDOB = userDOB;
+      state.userPAN = userPAN;
+      state.userAadhar = userAadhar;
+      state.userOccupation = userOccupation;
+      state.userMonthlyIncome = userMonthlyIncome;
     },
 
     fetchingKycFailed: (state, action) => {
@@ -51,27 +92,29 @@ const kycSlice = createSlice({
       state.documents = null;
       state.overallStatus = null;
       state.loaded = false;
+    },
   },
-},
 
   extraReducers: (builder) => {
     builder.addCase(postPersonalInfoSuccess, (state, action) => {
-  const { kycStatus } = action.payload || {};
+      const { kycStatus } = action.payload || {};
 
-  if (kycStatus) {
-    state.personalInfo = kycStatus.personalInfo;
-    state.documents = kycStatus.documents;
-    state.overallStatus = kycStatus.overallStatus;
-  }});
+      if (kycStatus) {
+        state.personalInfo = kycStatus.personalInfo;
+        state.documents = kycStatus.documents;
+        state.overallStatus = kycStatus.overallStatus;
+      }
+    });
   },
 });
 
 export const {
   fetchKycStart,
   fetchKycSuccess,
+  fetchFullKycSuccess,
   fetchingKycFailed,
   clearKycStatus,
-  clearKycOnLogout
+  clearKycOnLogout,
 } = kycSlice.actions;
 
 export default kycSlice.reducer;

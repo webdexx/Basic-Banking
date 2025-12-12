@@ -60,11 +60,11 @@ export default function Sidebar() {
         </ul>
 
         <div className="sidebar_footer">
-          <button className="logout__btn" onClick={handleLogout}>
+          <button className="primary-btn" onClick={handleLogout}>
             <MdLogout className="icon" />
             <span>Logout</span>
           </button>
-          <button className="support__btn">
+          <button className="primary-btn">
             <MdContactSupport className="icon" /> Support
           </button>
         </div>

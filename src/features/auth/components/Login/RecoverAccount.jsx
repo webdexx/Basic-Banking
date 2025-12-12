@@ -26,21 +26,21 @@ export default function Login() {
         {step === 1 &&
         <>
             <input name="email" placeholder="Email" />
-            <button onClick={handleNext}>Next</button>
+            <button onClick={handleNext} className="primary-btn">Next</button>
         </>
         
         }
         {step === 2 &&
         <>
         <input name="mobile" placeholder="Enter your Mobile Number" />
-        <button onClick={handleNext}>Generate OTP</button>
+        <button onClick={handleNext} className="primary-btn">Generate OTP</button>
         </>
         
         }
         {step === 3 &&
         <>
         <input name="otp" placeholder="Enter OTP" />
-        <button onClick={handleNext}>Submit</button>
+        <button onClick={handleNext} className="primary-btn">Submit</button>
         </>
         
         }

@@ -97,7 +97,7 @@ export default function Overview() {
       </div>
       <div className="card__row">
         {transactions.length > 0 && (
-          <Card className="overview__transactions__card">
+          <Card className="table__container__card">
             <h1>Recent 5 Transactions</h1>
             <div className="">
               <table>

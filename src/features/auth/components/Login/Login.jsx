@@ -98,7 +98,7 @@ export default function Login() {
           type="password"
           disabled={loading}
         />
-        <button disabled={loading} style={{ width: "100%" }}>
+        <button disabled={loading} style={{ width: "100%" }} className="primary-btn">
           {loading ? "Logging in..." : "Login"}
         </button>
         {error && !formError && <p className="login-error">🚨 {error}</p>}
