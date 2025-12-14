@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { LuArrowDownRight, LuArrowUpRight } from "react-icons/lu";
 
 import TransactionDetails from "./TransactionView";
-import Card from "./components/Card";
+import Card from "../components/Card";
 import {
   fetchTransactions,
   fetchTransactionById,

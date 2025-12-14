@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { motion as Motion } from "framer-motion";
-import Card from "./components/Card";
+import Card from "../components/Card";
 
 import { createTransactions } from "@/features/transactions/createTransaction";
 

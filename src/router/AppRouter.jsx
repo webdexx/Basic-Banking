@@ -3,11 +3,11 @@ import React from "react";
 const AuthLayout = React.lazy(() => import("@/features/auth/pages/AuthLayout"));
 // import DashboardLayout from "@/layouts/DashboardLayout";
 const DashboardLayout = React.lazy(() => import("@/layouts/DashboardLayout"));
-const Overview = React.lazy(() => import("@/components/dashboard/Overview"));
-const Transactions = React.lazy(() => import("@/components/dashboard/Transactions"));
-const Settings = React.lazy(() => import("@/components/dashboard/Settings"));
-const ProductCard  = React.lazy(() => import("@/components/dashboard/ProductCard"));
-const SendMoney = React.lazy(() => import("@/components/dashboard/SendMoney"));
+const Overview = React.lazy(() => import("@/components/dashboard/Overview/Overview"));
+const Transactions = React.lazy(() => import("@/components/dashboard/Transactions/Transactions"));
+const Settings = React.lazy(() => import("@/components/dashboard/Settings/Settings"));
+const ProductCard  = React.lazy(() => import("@/components/dashboard/ProductCard/ProductCard"));
+const SendMoney = React.lazy(() => import("@/components/dashboard/SendMoney/SendMoney"));
 const KYCLayout = React.lazy(() => import("@/features/auth/pages/KYCLayout"));
 
 export default function AppRouter() {

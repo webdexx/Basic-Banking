@@ -1,4 +1,4 @@
-import Card from "./components/Card";
+import Card from "../components/Card";
 import "./Overview.css";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ import {
   LuArrowUpRight,
 } from "react-icons/lu";
 
-import TransactionDetails from "./TransactionView";
+import TransactionDetails from "../Transactions/TransactionView";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 export default function Overview() {

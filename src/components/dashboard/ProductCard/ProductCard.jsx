@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import Card from "./components/Card";
+import Card from "../components/Card";
 
 import { LuEye } from "react-icons/lu";
 
