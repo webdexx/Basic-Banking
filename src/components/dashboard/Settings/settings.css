@@ -1,6 +1,7 @@
 .settings-container {
   width: 70%;
 }
+
 .user-profile-container {
   display: flex;
   flex-direction: column;
@@ -53,13 +54,15 @@
   left: 40px;
 }
 
-.info__container {
+.info__container__settings {
     padding: 10px 10px;
     display: flex;
+    width: 100%;
     gap: 10px;
+    color: #111111 !important;
 }
 
-.info__container .personalInfo {
+.info__container__settings .personalInfo {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -69,18 +72,18 @@
     margin: 0 0 0 20px;
 }
 
-.info__container .personalInfo p {
+.info__container__settings .personalInfo p {
     line-height: 0.5rem;
     font-weight: 400;
 }
 
-.info__container .personalInfo .icon {
+.info__container__settings .personalInfo .icon {
     position: relative;
     top: 12%;
     margin-right: 6px;
 }
 
-.info__container .otherInfo {
+.info__container__settings .otherInfo {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -90,12 +93,12 @@
     margin: 0 0 0 20px;
 }
 
-.info__container .otherInfo p {
+.info__container__settings .otherInfo p {
     line-height: 0.5rem;
     font-weight: 400;
 }
 
-.info__container .otherInfo .icon {
+.info__container__settings .otherInfo .icon {
     position: relative;
     top: 12%;
     margin-right: 6px;

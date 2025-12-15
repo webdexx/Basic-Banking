@@ -45,47 +45,19 @@ h1 {
     margin: 10px 10px 0px 0px;
 }
 
+.tab-icon {
+  position: relative;
+  top: 2.5px;
+}
+
+.active-tab-btn{
+  background-color: #161414;
+  color: #fff;
+}
+
 .tab-btn:hover {
     background-color: #f3f3f3;
 }
-
-/* ======== Form Styles ======== */
-
-/* label {
-  display: block;
-  color: var(--main-black);
-  font-weight: 600;
-  margin-bottom: 8px;
-  font-size: 14px;
-}
-
-input[type="text"],
-input[type="date"],
-select {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  font-size: 15px;
-  color: var(--main-black);
-  background: var(--main-white);
-  transition: all 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="date"]:focus,
-select:focus {
-  outline: none;
-  border-color: var(--theme-blue);
-  box-shadow: 0 0 0 1px rgba(5, 60, 94, 0.1);
-}
-
-
-@media (max-width: 768px) {
-    h1 {
-    font-size: 24px;
-  }
-} */
 
 /* Imported Styles */
 .section-title {

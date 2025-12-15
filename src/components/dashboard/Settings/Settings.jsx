@@ -8,7 +8,6 @@ import {
   LuSettings,
   LuShieldCheck,
   LuBadgeCheck,
-  LuSquareUserRound,
   LuKeyRound,
   LuMap,
   LuIndianRupee,
@@ -17,7 +16,8 @@ import {
   LuPhoneForwarded,
   LuNewspaper,
   LuSquareCheckBig,
-  LuTrash2,
+  LuCalendarHeart,
+  LuCircleDashed
 } from "react-icons/lu";
 
 import Profile from "@assets/images/profile.jpg";
@@ -28,35 +28,51 @@ export default function Settings() {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("accountInfo");
 
-  const {
-    userFullName,
-    userEmail,
-    userMobile,
-    userPermanentAddress,
-    userDOB,
-    userGender,
-  } = useSelector((state) => state.kyc);
+  useDocumentTitle("Settings");
+
+  const userFullName = useSelector((s) => s.kyc.userFullName);
+  const userEmail = useSelector((s) => s.kyc.userEmail);
+  const userMobile = useSelector((s) => s.kyc.userMobile);
+  const userPermanentAddress = useSelector((s) => s.kyc.userPermanentAddress);
+  const userDOB = useSelector((s) => s.kyc.userDOB);
+  const userGender = useSelector((s) => s.kyc.userGender);
 
   useEffect(() => {
-    dispatch(fetchFullKyc());
-  }, [dispatch]);
-
-  useDocumentTitle("Settings");
+    if (!userFullName) {
+      dispatch(fetchFullKyc());
+    }
+  }, [dispatch, userFullName]);
 
   return (
     <div className="settings-container">
-      <button className="tab-btn" onClick={() => setActiveTab("accountInfo")}>
-        <LuUserRound /> Account
+      <button
+        className={
+          activeTab === "accountInfo" ? "tab-btn active-tab-btn" : "tab-btn"
+        }
+        onClick={() => setActiveTab("accountInfo")}
+      >
+        <LuUserRound className="tab-icon" size={19} /> Account
       </button>
-      <button className="tab-btn" onClick={() => setActiveTab("settings")}>
-        <LuSettings /> Settings
+      <button
+        className={
+          activeTab === "settings" ? "tab-btn active-tab-btn" : "tab-btn"
+        }
+        onClick={() => setActiveTab("settings")}
+      >
+        <LuSettings className="tab-icon" size={19} /> Settings
       </button>
-      <button className="tab-btn" onClick={() => setActiveTab("privacy")}>
-        <LuShieldCheck /> Privacy
+      <button
+        className={
+          activeTab === "privacy" ? "tab-btn active-tab-btn" : "tab-btn"
+        }
+        onClick={() => setActiveTab("privacy")}
+      >
+        <LuShieldCheck className="tab-icon" size={19} /> Privacy
       </button>
       {activeTab === "accountInfo" && (
         <div className="accountInfo">
           <h1>Account Info</h1>
+          
           <div className="user-profile-container">
             <div className="profile-header">
               <h1
@@ -74,13 +90,11 @@ export default function Settings() {
                   <p className="sub-text">Primary Account Holder</p>
                 </h3>
               </div>
-
-              {/* <p>{email}</p> */}
             </div>
             <div className="user-profile-gapper"></div>
           </div>
 
-          <Card className="info__container">
+          <Card className="info__container__settings">
             <div className="personalInfo">
               <p>
                 <LuUserRound className="icon" /> {userFullName}
@@ -94,10 +108,10 @@ export default function Settings() {
             </div>
             <div className="otherInfo">
               <p>
-                <LuUserRound className="icon" /> {userGender}
+                <LuCircleDashed className="icon" /> {userGender}
               </p>
               <p>
-                <LuMail className="icon" />{" "}
+                <LuCalendarHeart className="icon" />{" "}
                 {userDOB
                   ? `${userDOB.split("-")[2]}/${userDOB.split("-")[1]}/${
                       userDOB.split("-")[0]
@@ -105,12 +119,12 @@ export default function Settings() {
                   : "Loading"}
               </p>
               <p>
-                <LuUserRound className="icon" /> {userGender}
+                
               </p>
             </div>
           </Card>
           <Card
-            className="info__container personalInfo"
+            className="info__container__settings personalInfo"
             style={{ padding: "40px" }}
           >
             <p>
@@ -164,7 +178,9 @@ export default function Settings() {
               <div className="settings__icon">
                 <LuSquareCheckBig size={54} />
               </div>
-              <button className="pill-neutral-dark">Request KYC Verification</button>
+              <button className="pill-neutral-dark">
+                Request KYC Verification
+              </button>
             </Card>
           </div>
         </div>
@@ -184,24 +200,23 @@ export default function Settings() {
             <hr />
             <h2>2. Information We Collect</h2>
             <h3>2.1 Personal Information</h3>
-            <p>
-              <ol>
-                <li>
-                  Name and Contact Details: We collect your name, email address,
-                  phone number, and mailing address when you register for our
-                  services.
-                </li>
-                <li>
-                  Demographic Information: Age, gender, date of birth, and
-                  occupation.
-                </li>
-                <li>
-                  Identification Documents: PAN number, Aadhaar number, or other
-                  government-issued IDs for verification purposes (where
-                  applicable).
-                </li>
-              </ol>
-            </p>
+
+            <ol>
+              <li>
+                Name and Contact Details: We collect your name, email address,
+                phone number, and mailing address when you register for our
+                services.
+              </li>
+              <li>
+                Demographic Information: Age, gender, date of birth, and
+                occupation.
+              </li>
+              <li>
+                Identification Documents: PAN number, Aadhaar number, or other
+                government-issued IDs for verification purposes (where
+                applicable).
+              </li>
+            </ol>
           </Card>
           <div
             style={{

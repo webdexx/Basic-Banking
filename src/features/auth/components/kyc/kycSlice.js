@@ -60,18 +60,23 @@ const kycSlice = createSlice({
         userOccupation,
         userMonthlyIncome,
       } = action.payload;
-      state.userFullName = userFullname;
-      state.userEmail = userEmail;
-      state.userMobile = userMobile;
-      state.userStatus = userStatus;
-      state.userPermanentAddress = userPermanentAddress;
-      state.userCorrespondenceAddress = userCorrespondenceAddress;
-      state.userGender = userGender;
-      state.userDOB = userDOB;
-      state.userPAN = userPAN;
-      state.userAadhar = userAadhar;
-      state.userOccupation = userOccupation;
-      state.userMonthlyIncome = userMonthlyIncome;
+
+      if (userFullname) {
+        state.userFullName = userFullname;
+        state.userEmail = userEmail;
+        state.userMobile = userMobile;
+        state.userStatus = userStatus;
+        state.userPermanentAddress = userPermanentAddress;
+        state.userCorrespondenceAddress = userCorrespondenceAddress;
+        state.userGender = userGender;
+        state.userDOB = userDOB;
+        state.userPAN = userPAN;
+        state.userAadhar = userAadhar;
+        state.userOccupation = userOccupation;
+        state.userMonthlyIncome = userMonthlyIncome;
+        state.loading = false;
+        state.loaded = true;
+      }
     },
 
     fetchingKycFailed: (state, action) => {
