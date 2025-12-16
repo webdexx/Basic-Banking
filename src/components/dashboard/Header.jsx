@@ -24,7 +24,6 @@ export default function Header() {
         </div>
 
         <div className="header__menu">
-          {notification}
           <Link to="#" className="header__icon">
             <MdOutlineSettings />
           </Link>
@@ -35,7 +34,7 @@ export default function Header() {
             {notification === true ? (
               <MdNotificationAdd onClick={() => setNotification(false)} />
             ) : (
-              <MdNotifications />
+              <MdNotifications onClick={() => setNotification(true)}/>
             )}
           </Link>
           <Link to="#">

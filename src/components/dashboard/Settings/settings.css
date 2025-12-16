@@ -41,7 +41,7 @@
 .user-profile .info .icon {
     position: absolute;
     top: 22px;
-    left: 160px;
+    left: 200px;
 }
 
 .user-profile img {
@@ -122,6 +122,10 @@
     align-items: center;
     border-radius: 50%;
     margin: 10px 0;
+}
+
+.settings-container .settings__card button {
+  padding: 10px 20px;
 }
 
 .settings-container .settings__card button:hover{
