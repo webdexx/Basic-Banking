@@ -3,18 +3,11 @@ import { fetchAccountData } from "./accountSlice";
 
 export const fetchAccount = () => async (dispatch) => {
   try {
-    const token = sessionStorage.getItem("token");
-    if (!token) {
-      console.error("No token Found");
-      return;
-    }
 
-    const res = await axios.get("http://localhost:3000/account/show", {
-      headers: {
-        Authorization: `${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await axios.get(
+      "http://localhost:3000/account/show",
+      { withCredentials: true }
+    );
 
     if (res.data.accountDetails) {
       const accountData = {
@@ -24,7 +17,6 @@ export const fetchAccount = () => async (dispatch) => {
         balance: res.data.accountDetails.balance,
         blockedAmount: res.data.accountDetails.blockedAmount,
         status: res.data.accountDetails.status,
-        token: token, // Pass the token along
       };
       dispatch(fetchAccountData(accountData));
     } else {
