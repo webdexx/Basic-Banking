@@ -1,10 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// const getToken = () => {
-//   const token = sessionStorage.getItem("token");
-//   return token && token !== "undefined" && token !== "null" ? token : null;
-// };
-
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -13,6 +8,7 @@ const authSlice = createSlice({
     error: null,
     authMessage: null,
     accountStatus: null,
+    checkRefresh: false,
   },
 
   reducers: {
@@ -25,6 +21,7 @@ const authSlice = createSlice({
     onPageRefresh: (state, action) => {
       const { flag } = action.payload;
       state.isAuth = true;
+      state.checkRefresh = true;
       state.error = null;
       state.authMessage = "Page Refreshed";
       state.accountStatus = flag;
@@ -36,12 +33,14 @@ const authSlice = createSlice({
       // sessionStorage.setItem("token", token);
       state.error = null;
       state.authMessage = "Login Success ✅";
+      state.checkRefresh = true;
       state.accountStatus = flag;
     },
     loginFailed: (state, action) => {
       state.token = null;
       state.isAuth = false;
       state.loading = false;
+      state.checkRefresh = true;
       state.error = action.payload;
       state.authMessage = null;
     },
@@ -53,6 +52,7 @@ const authSlice = createSlice({
       state.isAuth = false;
       state.authMessage = "LoggedOut ⚠️";
       state.loading = false;
+      state.checkRefresh = true;
       state.email = null;
       state.mobileNo = null;
 

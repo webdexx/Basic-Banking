@@ -803,24 +803,6 @@ tbody tr:last-child td {
   padding: 10px 50px;
 }
 
-<<<<<<< HEAD
-/* Floating Window */
-.floting-backdrop {
-  background-color: rgba(0, 0, 0, 0.352);
-  position: fixed;
-  top: 0;
-  display: flex;
-  z-index: 9999;
-}
-.floating-container {
-  background-color: #fff;
-  padding: 10px;
-  border: 1px solid #333;
-  position: relative;
-  color: #000;
-  top: 90px;
-}
-=======
 /* Modals Stylings */
 .modal-backdrop {
   position: fixed;
@@ -903,4 +885,3 @@ tbody tr:last-child td {
     opacity: 1;
   }
 }
->>>>>>> 4a976e9515c3ad0919075d250e49513994d58284

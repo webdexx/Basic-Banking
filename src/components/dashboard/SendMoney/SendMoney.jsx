@@ -9,15 +9,10 @@ export default function SendMoney() {
 
   return (
     <>
-      <div className="beneficiary-change">
-        <span>
-          <input
-          type="checkbox"
-          onChange={() => setIsBeneficiary(!isBeneficiary)}
-        /> {!isBeneficiary ? "Existing Beneficiary?" : "New Beneficiary"}
-        </span>
-      </div>
 
+      <button className="tab-btn" onClick={() => setIsBeneficiary(true)}>Beneficiary List</button>
+      <button className="tab-btn" onClick={() => setIsBeneficiary(false)}>Beneficiary Form</button>
+      
       {isBeneficiary && (
         <div className="beneficiary-list">
           <BeneficiaryList />

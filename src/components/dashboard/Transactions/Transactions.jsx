@@ -90,13 +90,8 @@ export default function Transactions() {
                             )}{" "}
                           </span>
                         </td>
-<<<<<<< HEAD
-                        <td>{tx.amount}</td>
-                        <td>₹{tx.description}</td>
-=======
                         <td>₹{tx.amount}/-</td>
                         <td>{tx.description}</td>
->>>>>>> 4a976e9515c3ad0919075d250e49513994d58284
                         <td>
                           <button onClick={() => handleView(tx._id)} className="primary-btn">
                             View

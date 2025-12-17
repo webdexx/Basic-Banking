@@ -5,10 +5,21 @@ import { motion as Motion } from "framer-motion";
 
 import { createTransactions } from "@/features/transactions/createTransaction";
 
+import { addBeneficiary } from "@/features/beneficiary/addBeneficiary";
+
 export default function SendMoneyForm() {
   const dispatch = useDispatch();
   const { isAuth, error } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
+
+  const [formData, setFormData] = useState({
+    beneficiaryAccountNumber: "",
+    beneficiaryIfsc: "",
+    beneficiaryName: "",
+    amount: "",
+    description: "",
+  });
+
 
   const [successData, setSuccessData] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -25,36 +36,49 @@ export default function SendMoneyForm() {
     }
   }, [isAuth, navigate]);
 
+  const addBen = async (e) => {
+    try {
+      const benAccountNo = formData.beneficiaryAccountNumber;
+      const benName = formData.beneficiaryName;
+      const benIfsc = formData.beneficiaryIfsc;
+
+      const benAdd = await dispatch(
+        addBeneficiary({
+          benAccountNo,
+          benIfsc,
+          benName
+        })
+      );
+
+    } catch {
+      console.log(error);
+    }
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+
   const handleTransaction = async (e) => {
     e.preventDefault();
+
     setLoading(true);
     setErrorMessage(null);
     setSuccessData(null);
 
     try {
-      const amount = e.target.amount.value;
-      const description = e.target.description.value;
-      const beneficiaryAccountNumber = e.target.beneficiaryAccountNumber.value;
-      const beneficiaryIfsc = e.target.beneficiaryIfsc.value;
-      const beneficiaryName = e.target.beneficiaryName.value;
-
       const result = await dispatch(
-        createTransactions({
-          beneficiaryAccountNumber,
-          beneficiaryIfsc,
-          beneficiaryName,
-          amount,
-          description,
-        })
-      );
-      if (!result.success) {
-        setErrorMessage(result.error || "Transaction failed");
-      } else {
-        setSuccessData(result.transaction); // store transaction details
-      }
+        createTransactions(formData)).unwrap();
+
+      setSuccessData(result.transaction);
     } catch (err) {
-      setErrorMessage("Something went wrong", err);
-      // Show error message to user
+      setErrorMessage("Something went wrong" || err?.message);
     } finally {
       setLoading(false);
     }
@@ -84,6 +108,8 @@ export default function SendMoneyForm() {
                   name="beneficiaryAccountNumber"
                   id="beneficiaryAccountNumber"
                   placeholder="Enter Beneficiary Account Number"
+                  value={formData.beneficiaryAccountNumber}
+                  onChange={handleChange}
                   disabled={loading}
                 />
               </div>
@@ -95,6 +121,8 @@ export default function SendMoneyForm() {
                   type="text"
                   name="beneficiaryIfsc"
                   placeholder="Enter beneficiary IFSC Code"
+                  value={formData.beneficiaryIfsc}
+                  onChange={handleChange}
                   disabled={loading}
                 />
               </div>
@@ -107,6 +135,8 @@ export default function SendMoneyForm() {
                   type="text"
                   name="beneficiaryName"
                   placeholder="Enter beneficiary Name"
+                  value={formData.beneficiaryName}
+                  onChange={handleChange}
                   disabled={loading}
                 />
               </div>
@@ -116,6 +146,8 @@ export default function SendMoneyForm() {
                   type="number"
                   name="amount"
                   placeholder="Enter Amount"
+                  value={formData.amount}
+                  onChange={handleChange}
                   disabled={loading}
                 />
               </div>
@@ -126,6 +158,8 @@ export default function SendMoneyForm() {
                 <textarea
                   name="description"
                   placeholder="Description"
+                  value={formData.description}
+                  onChange={handleChange}
                   disabled={loading}
                 />
               </div>
@@ -139,6 +173,15 @@ export default function SendMoneyForm() {
             style={{ width: "20%" }}
           >
             {loading ? "Submitting..." : "Send Now"}
+          </button>
+          <button
+            type="button"
+            disabled={loading}
+            className="primary-btn"
+            style={{ width: "20%" }}
+            onClick={addBen}
+          >
+            Add Beneficiary
           </button>
         </Motion.form>
         {errorMessage && <p className="error-message">{errorMessage} 🚫</p>}
