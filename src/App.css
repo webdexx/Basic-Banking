@@ -797,3 +797,20 @@ tbody tr:last-child td {
   width: 94%;
   padding: 10px 50px;
 }
+
+/* Floating Window */
+.floting-backdrop {
+  background-color: rgba(0, 0, 0, 0.352);
+  position: fixed;
+  top: 0;
+  display: flex;
+  z-index: 9999;
+}
+.floating-container {
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #333;
+  position: relative;
+  color: #000;
+  top: 90px;
+}
