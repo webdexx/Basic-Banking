@@ -26,11 +26,8 @@ export default function Header() {
         </div>
 
         <div className="header__menu">
-<<<<<<< HEAD
-          <Link to="/" className="header__icon">
-=======
+
           <Link to="#" className="header__icon">
->>>>>>> 4a976e9515c3ad0919075d250e49513994d58284
             <MdOutlineSettings />
           </Link>
 
@@ -45,15 +42,7 @@ export default function Header() {
                 setNotificationOpen(true);
               }} />
             ) : (
-<<<<<<< HEAD
-              <MdNotifications onClick={(e) => {
-                e.preventDefault();
-                setNotification(false);
-                setNotificationOpen(false);
-              }}/>
-=======
               <MdNotifications onClick={() => setNotification(true)}/>
->>>>>>> 4a976e9515c3ad0919075d250e49513994d58284
             )}
             {notificationOpen && (
               <div className="floating-container" onClick={() => setNotificationOpen(false)}>
