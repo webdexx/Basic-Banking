@@ -1,70 +1,46 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { fetchTransactionById } from "@/features/transactions/fetchTransactions";
+import Card from "../../components/Card";
+import TransactionDetails from "../../Transactions/TransactionView";
 import { LuArrowDownRight, LuArrowUpRight } from "react-icons/lu";
 
-import TransactionDetails from "./TransactionView";
-import Card from "../components/Card";
-import {
-  fetchTransactions,
-  fetchTransactionById,
-} from "@features/transactions/fetchTransactions";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-
-export default function Transactions() {
+export default function OverviewTransactions() {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.auth.isAuth);
-
-  useDocumentTitle("Transactions");
-
-  const { transactions = [] } = useSelector((state) => state.transaction);
-
-  const { userFullName } = useSelector((s) => s.kyc )
-
+  const { transactions } = useSelector((state) => state.transaction);
   const [selectedTx, setSelectedTx] = useState(null);
 
-  useEffect(() => {
-    if (!isAuth) return;
-    const t = setTimeout(() => {
-      dispatch(fetchTransactions());
-    }, 3000);
-
-    return () => clearTimeout(t);
-  }, [dispatch, isAuth]);
-
-  if (!isAuth) {
-    return <div>Please login to access the dashboard</div>;
-  }
+  const { userFullName } = useSelector((s) => s.kyc);
 
   const handleView = async (id) => {
+    setSelectedTx(null);
+
     const tx = await dispatch(fetchTransactionById(id));
 
     if (!tx) {
       return;
     }
-
     setSelectedTx(tx);
   };
 
   return (
-    <>
-      <h1>Transactions</h1>
-      <div className="card__row">
+    <div className="card__row">
+      {transactions.length > 0 && (
         <Card className="table__container__card">
-          <h1>Top Transactions</h1>
+          <h1>Recent 5 Transactions</h1>
           <div className="">
             <table>
               <thead>
                 <tr>
                   <th>Sender/Receiver</th>
-                  <th>Type</th>
+                  <th>Transaction Type</th>
                   <th>Amount</th>
-                  <th>Description</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {transactions?.length > 0 ? (
-                  transactions.map((tx) => {
+                  transactions.slice(0, 5).map((tx) => {
                     const isIncoming =
                       tx.type === "DEPOSIT" || tx.type === "TRANSFER_IN";
                     return (
@@ -82,23 +58,21 @@ export default function Transactions() {
                                 : "pill pill-error"
                             }
                           >
-                            {isIncoming ? "Received" : "Sent"}
+                            {isIncoming ? "Received " : "Sent "}{" "}
                             {isIncoming ? (
                               <LuArrowDownRight />
                             ) : (
                               <LuArrowUpRight />
-                            )}{" "}
+                            )}
                           </span>
                         </td>
-<<<<<<< HEAD
-                        <td>{tx.amount}</td>
-                        <td>₹{tx.description}</td>
-=======
                         <td>₹{tx.amount}/-</td>
-                        <td>{tx.description}</td>
->>>>>>> 4a976e9515c3ad0919075d250e49513994d58284
+
                         <td>
-                          <button onClick={() => handleView(tx._id)} className="primary-btn">
+                          <button
+                            className="primary-btn btn"
+                            onClick={() => handleView(tx._id)}
+                          >
                             View
                           </button>
                         </td>
@@ -107,26 +81,33 @@ export default function Transactions() {
                   })
                 ) : (
                   <tr>
-                    <td colSpan="4" style={{ textAlign: "center" }}>                      No Transactions Found
+                    <td colSpan="6" style={{ textAlign: "center" }}>
+                      {setTimeout(() => {
+                        <Skeleton />;
+                      }, 2000)}
+                      No Transactions Found
                     </td>
                   </tr>
                 )}
               </tbody>
             </table>
+            {/* show details (modal/panel) */}
+            {selectedTx && (
+              <div className="modal-backdrop" >
+                <div className="modal">
+                  <TransactionDetails transaction={selectedTx} />
+                  <button
+                    className="close-btn btn"
+                    onClick={() => setSelectedTx(null)}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </Card>
-      </div>
-      {/* show details (modal/panel) */}
-      {selectedTx && (
-        <div className="modal-backdrop">
-          <div className="modal">
-            <TransactionDetails transaction={selectedTx} />
-            <button className="close-btn" onClick={() => setSelectedTx(null)}>
-              Close
-            </button>
-          </div>
-        </div>
       )}
-    </>
+    </div>
   );
 }

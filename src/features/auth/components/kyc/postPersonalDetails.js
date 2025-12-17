@@ -12,12 +12,7 @@ export const postPersonalInfo = (personalDetails) => async (dispatch) => {
 
     const res = await axios.post("http://localhost:3000/kyc/personal-details",
         personalDetails,
-        {
-      headers: {
-        Authorization: `${token}`,
-        "Content-Type": "application/json",
-      },
-    }
+        {withCredentials: true},
     );
 
     dispatch(postPersonalInfoSuccess(res.data));

@@ -15,9 +15,9 @@ const accountSlice = createSlice({
     status: null,
     loading: false,
     error: null,
-    id: null, // Added
-    user: null, // Added
-    isAuth: false, // Added
+    id: null, 
+    user: null, 
+    isAuth: false,
     flag: null,
   },
   reducers: {

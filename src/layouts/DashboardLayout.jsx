@@ -7,10 +7,16 @@ import { useEffect } from 'react';
 import { fetchAccount } from '@/features/account/fetchAccount';
 import { fetchTransactions } from '@/features/transactions/fetchTransactions';
 import { fetchCard } from '@/features/cards/fetchCards';
+import { fetchFullKyc } from '@/features/auth/components/kyc/fetchKYC';
+import { fetchMe } from '@/features/auth/components/Login/fetchMe';
 
 export default function DashboardLayout() {
 const dispatch = useDispatch();
 const navigate = useNavigate();
+
+useEffect(() => {
+  dispatch(fetchMe());
+}, []);
 
 const { isAuth } = useSelector((state) => state.auth);
 
@@ -22,6 +28,7 @@ const { isAuth } = useSelector((state) => state.auth);
 
     dispatch(fetchAccount());
     dispatch(fetchCard());
+    dispatch(fetchFullKyc());
   }, [dispatch, isAuth, navigate]);
   
 

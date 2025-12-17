@@ -1,4 +1,3 @@
-// transactionsSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const getToken = () => {
@@ -10,8 +9,8 @@ const transactionSlice = createSlice({
   name: "transaction",
   initialState: {
     token: getToken(),
-    transactions: [], // store array of txs
-    latestTransaction: null, // optional: quick access to latest
+    transactions: [],
+    latestTransaction: null,
     loading: false,
     error: null,
     isAuth: !!getToken(),
@@ -27,7 +26,6 @@ const transactionSlice = createSlice({
       state.latestTransaction = state.transactions.length
         ? state.transactions[0]
         : null;
-      // keep token if payload includes it
       if (action.payload.token) state.token = action.payload.token;
       state.isAuth = !!state.token;
     },
@@ -35,7 +33,6 @@ const transactionSlice = createSlice({
       state.loading = false;
       state.error = action.payload || "Failed to fetch transactions";
     },
-    // optional: select a transaction by  id
     selectTransaction: (state, action) => {
       const id = action.payload;
       state.latestTransaction =
