@@ -7,7 +7,6 @@ export default function OverviewInfo() {
   const { accountNumber, balance, blockedAmount, loading } = useSelector(
     (state) => state.account
   );
-    console.log(loading);
 
   if (!accountNumber) {
     setTimeout(() => {

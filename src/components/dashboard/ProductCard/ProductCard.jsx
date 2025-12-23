@@ -8,7 +8,6 @@ import { LuEye } from "react-icons/lu";
 import "./product-card.css";
 
 export default function ProductCard() {
-  const isAuth = useSelector((state) => state.auth.isAuth);
 
   const [cardKind, setCardKind] = useState("Prepaid");
 
@@ -19,10 +18,6 @@ export default function ProductCard() {
   console.log(`Card No: ${cardNo} \n Limit: ${limit}`);
 
   useDocumentTitle("Manage Cards");
-
-  useEffect(() => {
-    if (!isAuth) return;
-  }, [isAuth]);
 
   return (
     <>
@@ -37,51 +32,61 @@ export default function ProductCard() {
       <div className="left__aligned__container">
         {cardKind === "Prepaid" && (
           <Card className="table__container__card card__info__container">
-            <div className="card__img debit__card">
-              <div className="card__chip"></div>
-              <div className="card__logo"></div>
-              <div className="card__number">{cardNo}</div>
-            </div>
+            {
+              !cardNo ? <p>No Cards Available!</p> : (
+                <div className="card__img debit__card">
+                  <div className="card__chip"></div>
+                  <div className="card__logo"></div>
+                  <div className="card__number">{cardNo}</div>
+                </div>
+              )
+            }
+            {cardNo &&
+              <table>
+                <thead>
+                  <tr>
+                    <th>Card</th>
+                    <th>Type</th>
+                    <th>Expiry</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
 
-            <table>
-              <thead>
-                <tr>
-                  <th>Card</th>
-                  <th>Type</th>
-                  <th>Expiry</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <span className="pill pill-info">{cardNo}</span>
+                    </td>
+                    <td>{cardType}</td>
+                    <td>
+                      <span className="pill pill-warning">
+                        {expiryMonth}/{expiryYear}
+                      </span>
+                    </td>
+                    <td>
+                      <button className="primary-btn">
+                        <LuEye />
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            }
 
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="pill pill-info">{cardNo}</span>
-                  </td>
-                  <td>{cardType}</td>
-                  <td>
-                    <span className="pill pill-warning">
-                      {expiryMonth}/{expiryYear}
-                    </span>
-                  </td>
-                  <td>
-                    <button className="primary-btn">
-                      <LuEye />
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           </Card>
         )}
         {cardKind === "Postpaid" && (
           <Card className="table__container__card card__info__container">
+            {!cardNo ? <p>No Postpaid Cards Available</p> : (
             <div className="card__img credit__card">
               <div className="card__chip"></div>
               <div className="card__logo"></div>
               <div className="card__number"></div>
             </div>
+            )}
 
+            {
+              cardNo && 
             <table>
               <thead>
                 <tr>
@@ -110,7 +115,7 @@ export default function ProductCard() {
                   </td>
                 </tr>
               </tbody>
-            </table>
+            </table>}
           </Card>
         )}
       </div>

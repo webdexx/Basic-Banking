@@ -2,10 +2,6 @@
 import React from "react";
 
 import "./transaction-details.css";
-
-import {
-  MdOutlineReceiptLong,
-} from "react-icons/md";
 import {
   LuArrowDownRight,
   LuArrowUpRight,

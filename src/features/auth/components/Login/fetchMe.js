@@ -11,7 +11,6 @@ export const fetchMe = () => async (dispatch) => {
     dispatch(onPageRefresh({
     flag: res.data.user.flag
     }));
-    console.log(res.data);
     dispatch(fetchKYC());
   } catch (error) {
     dispatch(onLogout());

@@ -8,6 +8,7 @@ import kycReducer from "@features/auth/components/kyc/kycSlice";
 import postPersonalInfoReducer from "@/features/auth/components/kyc/postPersonalInfoSlice";
 import postProfessionalInfoReducer from "@/features/auth/components/kyc/postProfessionalInfoSlice";
 import cardsReducer from "@/features/cards/cardSlice";
+import beneficiaryReducer from "@/features/beneficiary/beneficiarySlice";
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     postPersonalInfo: postPersonalInfoReducer,
     postProfessionalInfo: postProfessionalInfoReducer,
     cards: cardsReducer,
+    beneficiaries: beneficiaryReducer,
     ui: {
       modal: transactionViewReducer,
     },

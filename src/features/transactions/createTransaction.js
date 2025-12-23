@@ -12,11 +12,6 @@ export const createTransactions =
   }) =>
   async (dispatch) => {
     try {
-      const token = sessionStorage.getItem("token");
-      if (!token) {
-        console.error("No token found");
-      }
-
       const payload = {
         beneficiaryAccountNumber,
         beneficiaryIfsc,
@@ -28,12 +23,8 @@ export const createTransactions =
       const res = await axios.post(
         "http://localhost:3000/transactions/send-money",
         payload,
-        {
-          headers: {
-            Authorization: `${token}`,
-            "Content-Type": "application/json",
-          },
-        }
+        {},
+        {withCredentials: true}
       );
 
       dispatch(fetchTransactions());

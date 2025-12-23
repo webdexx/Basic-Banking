@@ -47,7 +47,7 @@ export default function Transactions() {
 
   return (
     <>
-      <h1>Welcome to Overview</h1>
+      <h1>Transactions</h1>
       <div className="card__row">
         <Card className="table__container__card">
           <h1>Top Transactions</h1>
@@ -93,7 +93,7 @@ export default function Transactions() {
                         <td>₹{tx.amount}/-</td>
                         <td>{tx.description}</td>
                         <td>
-                          <button onClick={() => handleView(tx._id)}  className="primary-btn">
+                          <button onClick={() => handleView(tx._id)} className="primary-btn">
                             View
                           </button>
                         </td>
@@ -102,8 +102,7 @@ export default function Transactions() {
                   })
                 ) : (
                   <tr>
-                    <td colSpan="6" style={{ textAlign: "center" }}>
-                      No Transactions Found
+                    <td colSpan="4" style={{ textAlign: "center" }}>                      No Transactions Found
                     </td>
                   </tr>
                 )}

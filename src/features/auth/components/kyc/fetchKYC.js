@@ -32,7 +32,6 @@ export const fetchFullKyc = () => async (dispatch) => {
     );
 
     dispatch(fetchFullKycSuccess(res.data.userData));
-    console.log(res.data.userData);
   } catch (error) {
     const errorMessage =
       error.response?.data?.message || error.message || "Signup failed";
