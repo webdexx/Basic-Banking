@@ -9,16 +9,9 @@ export const postProfessionalInfo =
   (ProfessionalDetails) => async (dispatch) => {
     dispatch(postProfessionalInfoStart());
     try {
-      const token = sessionStorage.getItem("token");
-
-      if (!token) {
-        throw new Error("No token Found. Please Login Again");
-      }
-
       const res = await axios.post(
         "http://localhost:3000/kyc/professional-details",
         ProfessionalDetails,
-        {},
         { withCredentials: true }
       );
 

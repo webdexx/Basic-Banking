@@ -11,7 +11,7 @@ export default function PendingReview(){
             <h1>Your Appilcation has been submited for Review</h1>
             <p>Please check this page after 24 hours</p>
             <Loader isOpen={open} onClose={() => setOpen(false)} />
-            <button onClick={() => setOpen(true)}>Track Application</button>
+            <button className="btn primary-btn" onClick={() => setOpen(true)}>Track Application</button>
             </div>
         </>
     )

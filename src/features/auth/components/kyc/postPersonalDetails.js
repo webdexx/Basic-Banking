@@ -4,12 +4,6 @@ import { postPersonalInfoStart, postPersonalInfoFailed, postPersonalInfoSuccess 
 export const postPersonalInfo = (personalDetails) => async (dispatch) => {
   dispatch(postPersonalInfoStart());
   try {
-    const token = sessionStorage.getItem("token");
-
-    if(!token) {
-        throw new Error("No token Found. Please Login Again");
-    }
-
     const res = await axios.post("http://localhost:3000/kyc/personal-details",
         personalDetails,
         {withCredentials: true},

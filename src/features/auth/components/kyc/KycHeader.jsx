@@ -20,10 +20,10 @@ export default function KycHeader() {
     <div className="kyc__header">
       <div className="kyc__nav">
         <div className="menu">
-          <button onClick={handleLogout}>
+          <button className="btn primary-btn" onClick={handleLogout}>
             <FiLogOut /> Logout
           </button>
-          <button>
+          <button className="btn primary-btn">
             Help <FiHelpCircle />
           </button>
         </div>

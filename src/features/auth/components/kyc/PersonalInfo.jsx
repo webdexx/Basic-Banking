@@ -71,14 +71,12 @@ export default function PersonalInfo() {
     return age;
   };
 
-
   // async function validatePincode(pincode) {
   //   const res = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
   //   const data = await res.json();
   //   console.log(data);
   //   return data[0].Status === "Success";
   // }
-
 
   const validateField = (name, value) => {
     switch (name) {
@@ -358,15 +356,14 @@ export default function PersonalInfo() {
                     }}
                   />
                   {errors.nationality && (
-                    <span className="form-error">
-                      *{errors.nationality}
-                    </span>
+                    <span className="form-error">*{errors.nationality}</span>
                   )}
                 </div>
               </div>
             </div>
 
             <button
+              className="primary-btn btn"
               type="button"
               onClick={() => {
                 const validationErrors = validateStep1(kycFormData);
@@ -479,9 +476,13 @@ export default function PersonalInfo() {
                         }));
                       }}
                     >
-                      <option value="" disabled>Select State</option>
+                      <option value="" disabled>
+                        Select State
+                      </option>
                       <option value="Andhra Pradesh">Andhra Pradesh</option>
-                      <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                      <option value="Arunachal Pradesh">
+                        Arunachal Pradesh
+                      </option>
                       <option value="Assam">Assam</option>
                       <option value="Bihar">Bihar</option>
                       <option value="Chhattisgarh">Chhattisgarh</option>
@@ -508,20 +509,23 @@ export default function PersonalInfo() {
                       <option value="Uttar Pradesh">Uttar Pradesh</option>
                       <option value="Uttarakhand">Uttarakhand</option>
                       <option value="West Bengal">West Bengal</option>
-                      <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                      <option value="Andaman and Nicobar Islands">
+                        Andaman and Nicobar Islands
+                      </option>
                       <option value="Chandigarh">Chandigarh</option>
-                      <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                      <option value="Dadra and Nagar Haveli and Daman and Diu">
+                        Dadra and Nagar Haveli and Daman and Diu
+                      </option>
                       <option value="New Delhi">New Delhi</option>
-                      <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                      <option value="Jammu and Kashmir">
+                        Jammu and Kashmir
+                      </option>
                       <option value="Ladakh">Ladakh</option>
                       <option value="Lakshadweep">Lakshadweep</option>
                       <option value="Puducherry">Puducherry</option>
-
                     </select>
                     {errors.permState && (
-                      <span className="form-error">
-                        **{errors.permState}**
-                      </span>
+                      <span className="form-error">**{errors.permState}**</span>
                     )}
                   </div>
                 </div>
@@ -582,10 +586,15 @@ export default function PersonalInfo() {
               </div>
             </div>
 
-            <button type="button" onClick={() => setStep(step - 1)}>
+            <button
+              className="primary-btn btn"
+              type="button"
+              onClick={() => setStep(step - 1)}
+            >
               Prev
             </button>
             <button
+              className="primary-btn btn"
               type="button"
               onClick={() => {
                 const validationErrors = validateStep2(kycFormData);
@@ -678,22 +687,78 @@ export default function PersonalInfo() {
 
                     <div className="input_container">
                       <label htmlFor="corrState">State</label>
-                      <input
-                        type="text"
-                        id="corrState"
-                        placeholder="Enter state"
-                        name="corrState"
-                        value={kycFormData.correspondenceAddress.state}
-                        onChange={(e) => {
-                          setKycFormData({
-                            ...kycFormData,
-                            correspondenceAddress: {
-                              ...kycFormData.correspondenceAddress,
-                              state: e.target.value,
-                            },
-                          });
-                        }}
-                      />
+                    <select
+                      id="corrState"
+                      name="corrState"
+                      value={kycFormData.correspondenceAddress.state}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setKycFormData({
+                          ...kycFormData,
+                          correspondenceAddress: {
+                            ...kycFormData.correspondenceAddress,
+                            state: value,
+                          },
+                        });
+
+                        const errorMsg = validateField("corrState", value);
+                        setErrors((prev) => ({
+                          ...prev,
+                          permState: errorMsg,
+                        }));
+                      }}
+                    >
+                      <option value="" disabled>
+                        Select State
+                      </option>
+                      <option value="Andhra Pradesh">Andhra Pradesh</option>
+                      <option value="Arunachal Pradesh">
+                        Arunachal Pradesh
+                      </option>
+                      <option value="Assam">Assam</option>
+                      <option value="Bihar">Bihar</option>
+                      <option value="Chhattisgarh">Chhattisgarh</option>
+                      <option value="Goa">Goa</option>
+                      <option value="Gujarat">Gujarat</option>
+                      <option value="Haryana">Haryana</option>
+                      <option value="Himachal Pradesh">Himachal Pradesh</option>
+                      <option value="Jharkhand">Jharkhand</option>
+                      <option value="Karnataka">Karnataka</option>
+                      <option value="Kerala">Kerala</option>
+                      <option value="Madhya Pradesh">Madhya Pradesh</option>
+                      <option value="Maharashtra">Maharashtra</option>
+                      <option value="Manipur">Manipur</option>
+                      <option value="Meghalaya">Meghalaya</option>
+                      <option value="Mizoram">Mizoram</option>
+                      <option value="Nagaland">Nagaland</option>
+                      <option value="Odisha">Odisha</option>
+                      <option value="Punjab">Punjab</option>
+                      <option value="Rajasthan">Rajasthan</option>
+                      <option value="Sikkim">Sikkim</option>
+                      <option value="Tamil Nadu">Tamil Nadu</option>
+                      <option value="Telangana">Telangana</option>
+                      <option value="Tripura">Tripura</option>
+                      <option value="Uttar Pradesh">Uttar Pradesh</option>
+                      <option value="Uttarakhand">Uttarakhand</option>
+                      <option value="West Bengal">West Bengal</option>
+                      <option value="Andaman and Nicobar Islands">
+                        Andaman and Nicobar Islands
+                      </option>
+                      <option value="Chandigarh">Chandigarh</option>
+                      <option value="Dadra and Nagar Haveli and Daman and Diu">
+                        Dadra and Nagar Haveli and Daman and Diu
+                      </option>
+                      <option value="New Delhi">New Delhi</option>
+                      <option value="Jammu and Kashmir">
+                        Jammu and Kashmir
+                      </option>
+                      <option value="Ladakh">Ladakh</option>
+                      <option value="Lakshadweep">Lakshadweep</option>
+                      <option value="Puducherry">Puducherry</option>
+                    </select>
+                    {errors.permState && (
+                      <span className="form-error">**{errors.corrState}**</span>
+                    )}
                     </div>
                   </div>
 
@@ -741,6 +806,7 @@ export default function PersonalInfo() {
               )}
             </div>
             <button
+              className="primary-btn btn"
               type="button"
               onClick={() => {
                 setStep(step - 1);
@@ -748,7 +814,7 @@ export default function PersonalInfo() {
             >
               Prev
             </button>
-            <button type="Submit" disabled={loading}>
+            <button className="primary-btn btn" type="Submit" disabled={loading}>
               {loading ? "Submitting" : "Submit"}
             </button>
           </div>
