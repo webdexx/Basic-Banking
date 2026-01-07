@@ -9,22 +9,30 @@ import { useEffect } from "react";
 import StepGuard from "./StepGuard";
 import { fetchKYC } from "../components/kyc/fetchKYC";
 import PendingReview from "../components/kyc/PendingReview";
+import { fetchMe } from "../components/Login/fetchMe";
 
 export default function KYCLayout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { isAuth, accountStatus } = useSelector((state) => state.auth);
-  const { personalInfo, documents, overallStatus, loaded } =
-    useSelector((state) => state.kyc);
+  const { personalInfo, documents, overallStatus, loaded } = useSelector(
+    (state) => state.kyc
+  );
 
   useEffect(() => {
-    if (!isAuth) return;
+    dispatch(fetchMe());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!isAuth) {
+      navigate("/", { replace: true });
+    }
 
     document.title = "Complete Your KYC First - Basic Banking";
 
     dispatch(fetchKYC());
-  }, [dispatch, isAuth]);
+  }, [dispatch, isAuth, navigate]);
 
   useEffect(() => {
     if (!isAuth || !loaded) return;
@@ -65,8 +73,8 @@ export default function KYCLayout() {
     return null;
   }
 
-  if(!loaded) {
-    return <div>Loading KYC</div>
+  if (!loaded) {
+    return <div>Loading KYC</div>;
   }
 
   return (

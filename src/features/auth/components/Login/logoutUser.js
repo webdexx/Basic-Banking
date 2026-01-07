@@ -11,7 +11,7 @@ export const logoutUser = () => async (dispatch) => {
       {},
       { withCredentials: true }
     );
-    console.log(res.data);
+    console.log(res.data.message);
   } catch {
     console.log("Error logging out");
   } finally {

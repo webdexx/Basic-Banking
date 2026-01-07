@@ -95,7 +95,7 @@ export default function Settings() {
                 <div className="info">
                   <span>
                     <h3>
-                      {userFullName} <LuBadgeCheck className="icon" />
+                      {userFullName} <LuBadgeCheck className="profile_icon" />
                     </h3>
                     <p className="sub-text">Primary Account Holder</p>
                   </span>

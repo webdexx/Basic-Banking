@@ -79,7 +79,6 @@
 .menu {
     width: 28%;
     display: flex;
-    flex-wrap: wrap;
     justify-content: flex-end;
     padding-right: 1%;
     gap: 20px;
@@ -90,7 +89,7 @@
     justify-content: center;
     align-items: center;
     gap: 6px;
-    padding: 14px 16px;
+    padding: 0.8rem 1rem;
     align-content: center;
     line-height: 1rem;
 }
