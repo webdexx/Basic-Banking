@@ -17,5 +17,17 @@ export default defineConfig({
       "@layouts": path.resolve(__dirname, "./src/layouts"),
       "@components": path.resolve(__dirname, "./src/components")
     }
-  }
+  },
+  server: {
+    host: '0.0.0.0',
+    port: process.env.PORT || 5173,
+  },
+  preview: {
+    host: '0.0.0.0',
+    port: process.env.PORT || 4173,
+    allowedHosts: [
+      'basic-banking-9lzv.onrender.com',
+      '.onrender.com',  // Allow all Render domains
+    ],
+  },
 })
