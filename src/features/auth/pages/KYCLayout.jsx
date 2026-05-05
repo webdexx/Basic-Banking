@@ -1,7 +1,7 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import KycHeader from "../components/kyc/KycHeader";
 import PersonalInfo from "../components/kyc/PersonalInfo";
-import ProfessionalDetails from "../components/kyc/professionalDetails";
+import ProfessionalDetails from "../components/kyc/ProfessionalDetails";
 import "../styles/kyc-layout.css";
 import KycSidebar from "../components/kyc/KycSidebar";
 import { useDispatch, useSelector } from "react-redux";
