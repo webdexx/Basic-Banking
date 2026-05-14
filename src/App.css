@@ -468,6 +468,22 @@ button {
   .button-group {
     flex-direction: column;
   }
+
+  .btn {
+    min-width: 60px;
+  }
+
+  .primary-btn {
+    padding: 6px 5px;
+    font-size: 14px;
+  }
+
+  .tab-btn {
+    font-size: 12px;
+    margin: 5px 5px 0px 0px;
+    min-width: 75px;
+    padding: 6px 7px;
+  }
 }
 
 /* ======== Table Styles ======== */

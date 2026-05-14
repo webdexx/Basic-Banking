@@ -1,19 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const getToken = () => {
-  const token = sessionStorage.getItem("token");
-  return token && token !== "undefined" && token !== "null" ? token : null;
-};
-
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    token: getToken(),
-    isAuth: !!getToken(),
+    isAuth: false,
     loading: false,
     error: null,
     authMessage: null,
     accountStatus: null,
+    checkRefresh: false,
   },
 
   reducers: {
@@ -23,33 +18,44 @@ const authSlice = createSlice({
       state.isAuth = false;
       state.authMessage = "Signing In..";
     },
-    loginSuccess: (state, action) => {
-      const { token, flag } = action.payload;
-      state.token = token;
+    onPageRefresh: (state, action) => {
+      const { flag } = action.payload;
       state.isAuth = true;
-      sessionStorage.setItem("token", token);
+      state.checkRefresh = true;
+      state.error = null;
+      state.authMessage = "Page Refreshed";
+      state.accountStatus = flag;
+    },
+    loginSuccess: (state, action) => {
+      const { flag } = action.payload;
+      // state.token = token;
+      state.isAuth = true;
+      // sessionStorage.setItem("token", token);
       state.error = null;
       state.authMessage = "Login Success ✅";
+      state.checkRefresh = true;
       state.accountStatus = flag;
     },
     loginFailed: (state, action) => {
       state.token = null;
       state.isAuth = false;
       state.loading = false;
+      state.checkRefresh = true;
       state.error = action.payload;
       state.authMessage = null;
     },
 
     onLogout: (state) => {
-      state.token = null;
+      // state.token = null;
       state.user = null;
       state.role = null;
       state.isAuth = false;
       state.authMessage = "LoggedOut ⚠️";
       state.loading = false;
+      state.checkRefresh = true;
       state.email = null;
       state.mobileNo = null;
-      
+
       sessionStorage.removeItem("accountNumber");
       sessionStorage.removeItem("balance");
       sessionStorage.removeItem("blockedAmount");
@@ -60,5 +66,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { loginSuccess, onLogout, loginFailed, loginStart, authMessage } = authSlice.actions;
+export const { loginSuccess, onLogout, loginFailed, loginStart, authMessage, onPageRefresh } =
+  authSlice.actions;
 export default authSlice.reducer;

@@ -1,0 +1,309 @@
+/* send-money.css */
+
+/* Option 1: Button Toggle */
+.send-money-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.toggle-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.toggle-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.toggle-header h2 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.toggle-header p {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+}
+
+.toggle-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.toggle-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 180px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  background: white;
+  color: #666;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 1.5rem;
+}
+
+.toggle-btn:hover {
+  border-color: #3498db;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.15);
+}
+
+.toggle-btn.active {
+  border-color: #2ecc71;
+  background: linear-gradient(135deg, #f8fffe 0%, #e8fff9 100%);
+  color: #27ae60;
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.2);
+}
+
+.toggle-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.toggle-divider {
+  color: #bdc3c7;
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
+
+.content-area {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Option 2: Tab Navigation */
+.tab-navigation {
+  display: flex;
+  background: white;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tab {
+  flex: 1;
+  padding: 1.5rem;
+  border: none;
+  background: #f8f9fa;
+  color: #6c757d;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.tab-active {
+  background: white;
+  color: #2c3e50;
+  box-shadow: inset 0 -3px 0 #3498db;
+}
+
+.tab-icon {
+  font-size: 1.5rem;
+}
+
+.tab-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  background: #3498db;
+  border-radius: 3px 3px 0 0;
+}
+
+.tab-content {
+  background: white;
+  border-radius: 0 0 12px 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Option 3: Toggle Switch */
+.mode-toggle {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.toggle-labels {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #7f8c8d;
+}
+
+.active-label {
+  color: #2c3e50;
+}
+
+.switch-container {
+  display: inline-block;
+  position: relative;
+}
+
+.toggle-checkbox {
+  display: none;
+}
+
+.toggle-switch {
+  display: inline-block;
+  width: 80px;
+  height: 40px;
+  background: #e0e0e0;
+  border-radius: 40px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.toggle-switch:hover {
+  background: #d0d0d0;
+}
+
+.toggle-checkbox:checked + .toggle-switch {
+  background: #2ecc71;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 32px;
+  height: 32px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.toggle-checkbox:checked + .toggle-switch .toggle-slider {
+  transform: translateX(40px);
+}
+
+.mode-description {
+  margin-top: 1rem;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+/* Quick Switch Button */
+.quick-switch {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+.switch-mode-btn {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+  transition: all 0.3s ease;
+}
+
+.switch-mode-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Animation for content switch */
+.content-container {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.content-container.beneficiary-mode {
+  animation: slideInRight 0.3s ease;
+}
+
+.content-container.form-mode {
+  animation: slideInLeft 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .toggle-controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .toggle-btn {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    flex-direction: row;
+    gap: 1rem;
+  }
+  
+  .toggle-icon {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+  }
+  
+  .tab-navigation {
+    flex-direction: column;
+  }
+  
+  .tab {
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .toggle-labels {
+    gap: 2rem;
+    font-size: 0.9rem;
+  }
+}

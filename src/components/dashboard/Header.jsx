@@ -12,6 +12,8 @@ import ProfileIcon from "./components/ProfileIcon";
 
 export default function Header() {
   const [notification, setNotification] = useState(true);
+  const [notificationOpen, setNotificationOpen] = useState(false);
+
   return (
     <>
       <div className="header">
@@ -24,18 +26,31 @@ export default function Header() {
         </div>
 
         <div className="header__menu">
+
           <Link to="#" className="header__icon">
             <MdOutlineSettings />
           </Link>
+
           <Link to="#" className="header__icon">
             <MdEmail />
           </Link>
           <Link to="#" className="header__icon">
             {notification === true ? (
-              <MdNotificationAdd onClick={() => setNotification(false)} />
+              <MdNotificationAdd onClick={(e) => {
+                e.preventDefault();
+                setNotification(true);
+                setNotificationOpen(true);
+              }} />
             ) : (
               <MdNotifications onClick={() => setNotification(true)}/>
             )}
+            {notificationOpen && (
+              <div className="floating-container" onClick={() => setNotificationOpen(false)}>
+                <p>Floating Window</p>
+              </div>
+            )
+
+            }
           </Link>
           <Link to="#">
             <ProfileIcon />

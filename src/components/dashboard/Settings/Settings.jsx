@@ -93,10 +93,12 @@ export default function Settings() {
               <div className="user-profile">
                 <img src={Profile} alt="" />
                 <div className="info">
-                  <h3>
-                    {userFullName} <LuBadgeCheck className="icon" />
+                  <span>
+                    <h3>
+                      {userFullName} <LuBadgeCheck className="profile_icon" />
+                    </h3>
                     <p className="sub-text">Primary Account Holder</p>
-                  </h3>
+                  </span>
                 </div>
               </div>
               <div className="user-profile-gapper"></div>
@@ -243,14 +245,12 @@ export default function Settings() {
                   {activeModal === "address" && <AddressUpdateForm />}
                   {activeModal === "money" && <h2>Coming Soon..</h2>}
                   {activeModal === "reports" && <h2>Coming Soon</h2>}
-                  {activeModal === "kycVerification" && (
-                    <h2>Coming Soon..</h2>
-                  )}
+                  {activeModal === "kycVerification" && <h2>Coming Soon..</h2>}
                   <button
-                  className="box-close"
+                    className="box-close"
                     onClick={() => setModalOpen(false)}
                   >
-                    <MdOutlineClose size={24}/>
+                    <MdOutlineClose size={24} />
                   </button>
                 </div>
               </div>

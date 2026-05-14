@@ -79,7 +79,6 @@
 .menu {
     width: 28%;
     display: flex;
-    flex-wrap: wrap;
     justify-content: flex-end;
     padding-right: 1%;
     gap: 20px;
@@ -90,7 +89,26 @@
     justify-content: center;
     align-items: center;
     gap: 6px;
-    padding: 14px 16px;
+    padding: 0.8rem 1rem;
     align-content: center;
     line-height: 1rem;
+}
+
+.message-window {
+    width: 50%;
+    height: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 14rem;
+    left: 30rem;
+    z-index: 999;
+    background-color: #e3e3e3;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 18px;
+    gap: 10px;
 }

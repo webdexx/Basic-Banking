@@ -207,7 +207,7 @@ export default function ProfessionalInfo() {
               </div>
             </div>
 
-            <button type="Submit" disabled={loading}>
+            <button className="btn primary-btn" type="Submit" disabled={loading}>
               {loading ? "Submitting" : "Submit"}
             </button>
           </div>

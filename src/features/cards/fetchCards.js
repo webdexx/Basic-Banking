@@ -3,18 +3,10 @@ import { fetchCardData } from "./cardSlice";
 
 export const fetchCard = () => async (dispatch) => {
   try {
-    const token = sessionStorage.getItem("token");
-    if (!token) {
-      console.error("No token Found");
-      return;
-    }
-
-    const res = await axios.get("http://localhost:3000/cards/my-card", {
-      headers: {
-        Authorization: `${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await axios.get(
+      "http://localhost:3000/cards/my-card",
+      { withCredentials: true }
+    );
 
     if (res.data.cardDetails) {
       const cardData = {
@@ -24,8 +16,7 @@ export const fetchCard = () => async (dispatch) => {
         cardType: res.data.cardDetails.cardType,
         expiryMonth: res.data.cardDetails.expiryMonth,
         expiryYear: res.data.cardDetails.expiryYear,
-        token: token, // Pass the token along
-      };
+       };
       console.log(cardData);
       dispatch(fetchCardData(cardData));
     } else {

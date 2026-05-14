@@ -8,8 +8,6 @@ export default function KycSidebar() {
     (state) => state.kyc
   );
 
-  console.log("Sidebar KYC:", { personalInfo, documents, overallStatus });
-
   const getCurrentStep = () => {
     if (overallStatus === "PENDING_REVIEW" || documents === "COMPLETE") {
       return 3;
@@ -23,9 +21,6 @@ export default function KycSidebar() {
   };
 
   const currentStep = getCurrentStep();
-
-  console.log(currentStep);
-
 
   return (
     <div className="kyc__sidebar">
